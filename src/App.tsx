@@ -10,7 +10,7 @@ import styled from 'styled-components'
 
 const queryClient = new QueryClient()
 
-// Styled Components
+var a = 1;
 
 const AppContainer = styled.div`
 	font-family: 'Poppins', sans-serif;
