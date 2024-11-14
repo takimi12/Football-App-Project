@@ -10,7 +10,6 @@ import styled from 'styled-components'
 
 const queryClient = new QueryClient()
 
-var a = 1
 
 const AppContainer = styled.div`
 	font-family: 'Poppins', sans-serif;
@@ -98,6 +97,7 @@ const App: React.FC = () => {
 	const [activeTab, setActiveTab] = useState<
 		'players' | 'teams' | 'games' | 'stats'
 	>('players')
+	var a = 1
 
 	const toggleTheme = () => {
 		setTheme((prevTheme) => (prevTheme === 'light' ? 'dark' : 'light'))
