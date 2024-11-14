@@ -1,0 +1,132 @@
+{
+	"players": [
+		{
+			"id": "cb2a",
+			"firstName": "adam",
+			"lastName": "adam",
+			"teamId": null
+		},
+		{
+			"id": "53db",
+			"firstName": "han",
+			"lastName": "han",
+			"teamId": null
+		}
+	],
+	"teams": [
+		{
+			"id": "256c",
+			"name": "aaaa",
+			"yearFounded": 2222,
+			"location": "2222",
+			"players": ["53db", "cb2a"]
+		},
+		{
+			"id": "5d85",
+			"name": "bbb",
+			"yearFounded": 2222,
+			"location": "2222",
+			"players": ["cb2a", "53db"]
+		},
+		{
+			"id": "ca61",
+			"name": "ccc",
+			"yearFounded": 3333,
+			"location": "ccc",
+			"players": ["cb2a"]
+		},
+		{
+			"id": "89ff",
+			"name": "ddd",
+			"yearFounded": 4444,
+			"location": "ddd",
+			"players": ["53db"]
+		}
+	],
+	"matches": [
+		{
+			"id": "863a",
+			"team1Id": "256c",
+			"team1Name": "aaaa",
+			"team2Id": "5d85",
+			"team2Name": "bbb",
+			"team1Score": 2,
+			"team2Score": 3,
+			"date": "2024-11-13T23:31",
+			"duration": "1",
+			"location": "1"
+		},
+		{
+			"id": "14f5",
+			"team1Id": "256c",
+			"team1Name": "aaaa",
+			"team2Id": "ca61",
+			"team2Name": "ccc",
+			"team1Score": 2,
+			"team2Score": 3,
+			"date": "2024-11-13T22:35",
+			"duration": "1",
+			"location": "1"
+		},
+		{
+			"id": "c4f5",
+			"team1Id": "256c",
+			"team1Name": "aaaa",
+			"team2Id": "89ff",
+			"team2Name": "ddd",
+			"team1Score": 3,
+			"team2Score": 4,
+			"date": "2024-11-13T22:35",
+			"duration": "1",
+			"location": "1"
+		},
+		{
+			"id": "8743",
+			"team1Id": "5d85",
+			"team1Name": "bbb",
+			"team2Id": "ca61",
+			"team2Name": "ccc",
+			"team1Score": 5,
+			"team2Score": 5,
+			"date": "2024-11-24T22:36",
+			"duration": "1",
+			"location": "1"
+		},
+		{
+			"id": "6407",
+			"team1Id": "5d85",
+			"team1Name": "bbb",
+			"team2Id": "89ff",
+			"team2Name": "ddd",
+			"team1Score": 2,
+			"team2Score": 1,
+			"date": "2024-11-13T22:36",
+			"duration": "1",
+			"location": "1"
+		},
+		{
+			"id": "e676",
+			"team1Id": "256c",
+			"team1Name": "aaaa",
+			"team2Id": "89ff",
+			"team2Name": "ddd",
+			"team1Score": 3,
+			"team2Score": 7,
+			"date": "2024-11-16T22:37",
+			"duration": "1",
+			"location": "11"
+		},
+		{
+			"id": "37c4",
+			"team1Id": "256c",
+			"team1Name": "aaaa",
+			"team2Id": "5d85",
+			"team2Name": "bbb",
+			"team1Score": 3,
+			"team2Score": 3,
+			"date": "2024-10-13T23:42",
+			"duration": "1",
+			"location": "1"
+		}
+	]
+}
