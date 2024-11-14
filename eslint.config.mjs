@@ -42,28 +42,31 @@
 // }
 export default [
 	{
-		files: ['*.ts', '*.tsx'], // Określenie, że konfiguracja dotyczy plików TypeScript
-		parser: '@typescript-eslint/parser', // Określenie parsera
-		parserOptions: {
-			ecmaVersion: 2020, // Wersja ECMAScript
-			sourceType: 'module', // Typ źródła jako moduł ES
-		},
-		globals: {
-			browser: true, // Definiowanie zmiennych globalnych
-			es2020: true,
-		},
-		extends: [
-			'eslint:recommended',
-			'plugin:@typescript-eslint/recommended',
-			'plugin:react-hooks/recommended',
+	  files: ['*.ts', '*.tsx'], // Określenie, że konfiguracja dotyczy plików TypeScript
+	  parser: '@typescript-eslint/parser', // Określenie parsera
+	  parserOptions: {
+		ecmaVersion: 2020, // Wersja ECMAScript
+		sourceType: 'module', // Typ źródła jako moduł ES
+	  },
+	  globals: {
+		browser: true, // Definiowanie zmiennych globalnych
+		es2020: true,
+	  },
+	  extends: [
+		'eslint:recommended',
+		'plugin:@typescript-eslint/recommended',
+		'plugin:react-hooks/recommended',
+	  ],
+	  plugins: ['react-refresh', 'import'],
+	  rules: {
+		'react-refresh/only-export-components': [
+		  'warn',
+		  { allowConstantExport: true },
 		],
-		plugins: ['react-refresh', 'import'],
-		rules: {
-			'react-refresh/only-export-components': [
-				'warn',
-				{ allowConstantExport: true },
-			],
-			'import/no-default-export': ['error'],
-		},
+		'import/no-default-export': ['error'],
+		// Dodanie reguły no-var
+		'no-var': 'error', // Zabrania używania var i wymusza użycie let lub const
+	  },
 	},
-]
+  ]
+  
