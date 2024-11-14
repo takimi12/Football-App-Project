@@ -1,28 +1,34 @@
 export default [
 	{
-	  files: ['*.ts', '*.tsx'], // Określenie, że konfiguracja dotyczy plików TypeScript
-	  parser: '@typescript-eslint/parser', // Określenie parsera dla TypeScript
+	  files: ['*.ts', '*.tsx'], // Dotyczy plików TypeScript
+	  parser: '@typescript-eslint/parser', // Parser dla TypeScript
 	  parserOptions: {
-		ecmaVersion: 2020, // Wersja ECMAScript
-		sourceType: 'module', // Typ źródła jako moduł ES
-	  },
-	  globals: {
-		browser: true, // Definiowanie zmiennych globalnych, np. browser
-		es2020: true,   // Definiowanie ECMAScript 2020
+		ecmaVersion: 2020, // ECMAScript 2020
+		sourceType: 'module', // Używamy modułów ES
 	  },
 	  extends: [
-		'eslint:recommended', // Zestaw reguł podstawowych ESLint
-		'plugin:@typescript-eslint/recommended', // Zestaw reguł dla TypeScript
-		'plugin:react-hooks/recommended', // Zestaw reguł dla React Hooks
+		'eslint:recommended', // Podstawowe reguły ESLint
+		'plugin:@typescript-eslint/recommended', // Reguły dla TypeScript
+		'plugin:react-hooks/recommended', // Reguły dla React Hooks
 	  ],
 	  plugins: ['react-refresh', 'import'], // Dodatkowe pluginy
+	  globals: {
+		// Jeśli używasz zmiennych globalnych, zadeklaruj je tutaj
+		browser: true, // Globalne zmienne dla przeglądarki
+	  },
 	  rules: {
+		// Przykładowe reguły
 		'react-refresh/only-export-components': [
 		  'warn', 
-		  { allowConstantExport: true }, // Ostrzeżenie przy eksportach komponentów
+		  { allowConstantExport: true }, // Ostrzeżenie, ale pozwala na eksport stałych
 		],
 		'import/no-default-export': ['error'], // Zabrania używania default export
-		'no-var': 'error', // Zabrania używania `var` i wymusza `let` lub `const`
+		'no-var': 'error', // Zabrania używania var i wymusza użycie let/const
+		'no-console': ['warn', { allow: ['warn', 'error'] }], // Ostrzeżenie o używaniu console.log, pozwala na warn i error
+		'no-unused-vars': ['warn', { argsIgnorePattern: '^_' }], // Warnuje o nieużywanych zmiennych, ignoruje zmienne zaczynające się od "_"
+		'semi': ['error', 'always'], // Wymusza użycie średników
+		'quotes': ['error', 'single'], // Wymusza używanie pojedynczych cudzysłowów
+		'indent': ['error', 2], // Wymusza wcięcia na 2 spacje
 	  },
 	},
   ];
