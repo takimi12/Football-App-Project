@@ -1,5 +1,5 @@
 #!/usr/bin/env sh
 . "$(dirname -- "$0")/_/husky.sh"
 
-npm prettify
-npm lint --fix
+npm run prettify
+npm run lint --fix
