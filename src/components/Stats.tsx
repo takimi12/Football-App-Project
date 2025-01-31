@@ -5,7 +5,6 @@ import { useGames } from '../hooks/useStatistics'
 import { GroupByPeriod, TeamScore } from '../types/game'
 import styled from 'styled-components'
 
-// Styled Components
 
 const Container = styled.div`
 	max-width: 1200px;
@@ -69,13 +68,11 @@ const ErrorMessage = styled.p`
 
 export const Statistics: React.FC = () => {
 	const [groupBy, setGroupBy] = useState<GroupByPeriod>('day')
-
 	const { data: games = [], error } = useGames()
-
+  
 	if (error instanceof Error) {
-		return <ErrorMessage>Error: {error.message}</ErrorMessage>
+	  return <ErrorMessage>Error: {error.message}</ErrorMessage>
 	}
-
 	const latestGame = games.length
 		? games.sort(
 				(a, b) =>
@@ -106,40 +103,71 @@ export const Statistics: React.FC = () => {
 		}),
 	)
 
+
 	const formatDate = (date: string, period: GroupByPeriod): string => {
 		const dateObj = new Date(date)
+		
 		if (period === 'day') {
-			return dateObj.toISOString().split('T')[0]
+		  return dateObj.toISOString().split('T')[0]
 		} else if (period === 'week') {
-			const startOfWeek = new Date(dateObj)
-			startOfWeek.setDate(startOfWeek.getDate() - startOfWeek.getDay())
-			return startOfWeek.toISOString().split('T')[0]
+		  const startOfWeek = new Date(dateObj)
+		  // Ustawiamy na początek tygodnia (poniedziałek)
+		  startOfWeek.setDate(dateObj.getDate() - dateObj.getDay() + (dateObj.getDay() === 0 ? -6 : 1))
+		  
+		  const endOfWeek = new Date(startOfWeek)
+		  endOfWeek.setDate(startOfWeek.getDate() + 6)
+		  
+		  // Format: "DD.MM - DD.MM"
+		  const formatDay = (date: Date) => {
+			const day = date.getDate().toString().padStart(2, '0')
+			const month = (date.getMonth() + 1).toString().padStart(2, '0')
+			return `${day}.${month}`
+		  }
+		  
+		  return `${formatDay(startOfWeek)} - ${formatDay(endOfWeek)}`
 		} else if (period === 'month') {
-			return `${dateObj.getFullYear()}-${dateObj.getMonth() + 1}`
+		  const month = (dateObj.getMonth() + 1).toString().padStart(2, '0')
+		  return `${dateObj.getFullYear()}-${month}`
 		}
 		return date
-	}
-
-	const gameCountsByPeriod = games.reduce(
+	  }
+	  const gameCountsByPeriod = games.reduce(
 		(acc: Record<string, number>, game) => {
-			const periodKey = formatDate(game.date, groupBy)
-			acc[periodKey] = (acc[periodKey] || 0) + 1
-			return acc
+		  const periodKey = formatDate(game.date, groupBy)
+		  acc[periodKey] = (acc[periodKey] || 0) + 1
+		  return acc
 		},
 		{},
-	)
+	  )
 
-	const chartData = {
-		labels: Object.keys(gameCountsByPeriod),
+	  const sortPeriodKeys = (keys: string[]): string[] => {
+		if (groupBy === 'week') {
+		  return keys.sort((a, b) => {
+			const [startA] = a.split(' - ')
+			const [startB] = b.split(' - ')
+			const [dayA, monthA] = startA.split('.')
+			const [dayB, monthB] = startB.split('.')
+			// Zakładamy ten sam rok
+			return new Date(2024, parseInt(monthA) - 1, parseInt(dayA)).getTime() -
+				   new Date(2024, parseInt(monthB) - 1, parseInt(dayB)).getTime()
+		  })
+		}
+		return keys.sort()
+	  }
+	
+	  const sortedPeriodKeys = sortPeriodKeys(Object.keys(gameCountsByPeriod))
+	
+
+	  const chartData = {
+		labels: sortedPeriodKeys,
 		datasets: [
-			{
-				label: 'Number of Games',
-				data: Object.values(gameCountsByPeriod),
-				backgroundColor: 'rgba(75, 192, 192, 0.6)',
-			},
+		  {
+			label: 'Number of Games',
+			data: sortedPeriodKeys.map(key => gameCountsByPeriod[key]),
+			backgroundColor: 'rgba(75, 192, 192, 0.6)',
+		  },
 		],
-	}
-
+	  }
 	const topTeamsData = {
 		labels: teamScores.map((team) => team.team),
 		datasets: [

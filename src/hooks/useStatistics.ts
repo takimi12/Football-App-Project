@@ -1,4 +1,3 @@
-// hooks/useGames.ts
 import { useQuery } from '@tanstack/react-query'
 import { Game } from '../types/game'
 

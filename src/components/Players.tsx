@@ -4,7 +4,6 @@ import { useTeams } from '../hooks/useTeams'
 import { Player } from '../types/players'
 import styled from 'styled-components'
 
-// Styled Components
 
 const PlayersContainer = styled.div`
 	padding: 20px;

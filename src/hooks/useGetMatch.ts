@@ -1,4 +1,3 @@
-// hooks/useFetchMatches.ts
 import { useQuery } from '@tanstack/react-query'
 import { Match } from '../types/match'
 

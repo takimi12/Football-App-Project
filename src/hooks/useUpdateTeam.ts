@@ -1,13 +1,11 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { Team } from '../types/teams'
 
-// Define the type for updating a team
 type UpdatedTeam = Partial<Omit<Team, 'id'>> & { id: string }
 
 export const useUpdateTeam = () => {
 	const queryClient = useQueryClient()
 
-	// Mutation for updating a team
 	const mutation = useMutation({
 		mutationFn: async (team: UpdatedTeam) => {
 			const response = await fetch(
@@ -22,7 +20,7 @@ export const useUpdateTeam = () => {
 			return response.json()
 		},
 		onSuccess: () => {
-			queryClient.invalidateQueries({ queryKey: ['teams'] }) // Invalidate teams query to refetch
+			queryClient.invalidateQueries({ queryKey: ['teams'] }) 
 		},
 	})
 
