@@ -4,4 +4,3 @@ export interface Player {
 	lastName: string
 	teamId: string | null
 }
-

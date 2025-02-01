@@ -17,7 +17,7 @@ export const useAddTeam = () => {
 			return response.json()
 		},
 		onSuccess: () => {
-			queryClient.invalidateQueries({ queryKey: ['teams'] }) 
+			queryClient.invalidateQueries({ queryKey: ['teams'] })
 		},
 	})
 

@@ -1,118 +1,107 @@
 {
-  "players": [
-    {
-      "firstName": "adam1",
-      "lastName": "adam1",
-      "id": "cb2a"
-    },
-    {
-      "id": "53db",
-      "firstName": "han",
-      "lastName": "han",
-      "teamId": null
-    }
-  ],
-  "teams": [
-    {
-      "id": "256c",
-      "name": "aaaa",
-      "yearFounded": 2010,
-      "location": "buratow",
-      "players": [
-        "53db",
-        "cb2a"
-      ]
-    },
-    {
-      "id": "5d85",
-      "name": "bbb",
-      "yearFounded": 2009,
-      "location": "drwinow",
-      "players": [
-        "cb2a",
-        "53db"
-      ]
-    },
-    {
-      "id": "ca61",
-      "name": "ccc",
-      "yearFounded": 2008,
-      "location": "ccc",
-      "players": [
-        "cb2a"
-      ]
-    },
-    {
-      "id": "89ff",
-      "name": "ddd",
-      "yearFounded": 2012,
-      "location": "ddd",
-      "players": [
-        "53db",
-        "cb2a"
-      ]
-    }
-  ],
-  "matches": [
-    {
-      "team1Id": "256c",
-      "team1Name": "aaaa",
-      "team2Id": "5d85",
-      "team2Name": "bbb",
-      "team1Score": 11,
-      "team2Score": 11,
-      "date": "2025-01-04T21:03",
-      "duration": "45",
-      "location": "warszawa",
-      "id": "69a8"
-    },
-    {
-      "team1Id": "256c",
-      "team1Name": "aaaa",
-      "team2Id": "ca61",
-      "team2Name": "ccc",
-      "team1Score": 1,
-      "team2Score": 2,
-      "date": "2025-01-12T21:04",
-      "duration": "90",
-      "location": "lublin",
-      "id": "d0c8"
-    },
-    {
-      "id": "7516",
-      "team1Id": "256c",
-      "team1Name": "aaaa",
-      "team2Id": "89ff",
-      "team2Name": "ddd",
-      "team1Score": 1,
-      "team2Score": 1,
-      "date": "2025-01-17T21:14",
-      "duration": "90",
-      "location": "krakow"
-    },
-    {
-      "id": "3526",
-      "team1Id": "5d85",
-      "team1Name": "bbb",
-      "team2Id": "256c",
-      "team2Name": "aaaa",
-      "team1Score": 2,
-      "team2Score": 2,
-      "date": "2024-12-31T21:14",
-      "duration": "45",
-      "location": "krakow"
-    },
-    {
-      "id": "6e6a",
-      "team1Id": "5d85",
-      "team1Name": "bbb",
-      "team2Id": "ca61",
-      "team2Name": "ccc",
-      "team1Score": 12,
-      "team2Score": 1,
-      "date": "2025-01-13T21:15",
-      "duration": "45",
-      "location": "krakow"
-    }
-  ]
+	"players": [
+		{
+			"firstName": "adam1",
+			"lastName": "adam1",
+			"id": "cb2a"
+		},
+		{
+			"id": "53db",
+			"firstName": "han",
+			"lastName": "han",
+			"teamId": null
+		}
+	],
+	"teams": [
+		{
+			"id": "256c",
+			"name": "aaaa",
+			"yearFounded": 2010,
+			"location": "buratow",
+			"players": ["53db", "cb2a"]
+		},
+		{
+			"id": "5d85",
+			"name": "bbb",
+			"yearFounded": 2009,
+			"location": "drwinow",
+			"players": ["cb2a", "53db"]
+		},
+		{
+			"id": "ca61",
+			"name": "ccc",
+			"yearFounded": 2008,
+			"location": "ccc",
+			"players": ["cb2a"]
+		},
+		{
+			"id": "89ff",
+			"name": "ddd",
+			"yearFounded": 2012,
+			"location": "ddd",
+			"players": ["53db", "cb2a"]
+		}
+	],
+	"matches": [
+		{
+			"team1Id": "256c",
+			"team1Name": "aaaa",
+			"team2Id": "5d85",
+			"team2Name": "bbb",
+			"team1Score": 11,
+			"team2Score": 11,
+			"date": "2025-01-04T21:03",
+			"duration": "45",
+			"location": "warszawa",
+			"id": "69a8"
+		},
+		{
+			"team1Id": "256c",
+			"team1Name": "aaaa",
+			"team2Id": "ca61",
+			"team2Name": "ccc",
+			"team1Score": 1,
+			"team2Score": 2,
+			"date": "2025-01-12T21:04",
+			"duration": "90",
+			"location": "lublin",
+			"id": "d0c8"
+		},
+		{
+			"id": "7516",
+			"team1Id": "256c",
+			"team1Name": "aaaa",
+			"team2Id": "89ff",
+			"team2Name": "ddd",
+			"team1Score": 1,
+			"team2Score": 1,
+			"date": "2025-01-17T21:14",
+			"duration": "90",
+			"location": "krakow"
+		},
+		{
+			"id": "3526",
+			"team1Id": "5d85",
+			"team1Name": "bbb",
+			"team2Id": "256c",
+			"team2Name": "aaaa",
+			"team1Score": 2,
+			"team2Score": 2,
+			"date": "2024-12-31T21:14",
+			"duration": "45",
+			"location": "krakow"
+		},
+		{
+			"id": "6e6a",
+			"team1Id": "5d85",
+			"team1Name": "bbb",
+			"team2Id": "ca61",
+			"team2Name": "ccc",
+			"team1Score": 12,
+			"team2Score": 1,
+			"date": "2025-01-13T21:15",
+			"duration": "45",
+			"location": "krakow"
+		}
+	]
 }

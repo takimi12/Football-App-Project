@@ -20,7 +20,7 @@ export const useUpdateTeam = () => {
 			return response.json()
 		},
 		onSuccess: () => {
-			queryClient.invalidateQueries({ queryKey: ['teams'] }) 
+			queryClient.invalidateQueries({ queryKey: ['teams'] })
 		},
 	})
 
