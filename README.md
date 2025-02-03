@@ -1,202 +1,214 @@
-# About The Project
+# Football App - Kompleksowy System Zarządzania Drużynami Sportowymi
+# Football App - Comprehensive Sports Team Management System
 
-**Sports Statistics Application** is a comprehensive platform designed to manage sports teams, players, and game statistics. This application offers a user-friendly interface to track team performance, manage player rosters, and analyze game statistics with dynamic visualizations. It's built to streamline team management and data analysis for sports enthusiasts, coaches, and analysts.
+## Project Description
+Football App is a web application designed for coaches, sports analysts, and team managers, providing comprehensive support for football team management through intuitive tools for monitoring, analysis, and administration. The application is developed as part of the React course by Frontowcy and is the third out of five projects.
 
-## Features
+## Project Goal
+The goal of the project is to create an efficient and user-friendly platform that enables:
 
-- **Player Database Management** with full CRUD operations for adding, updating, viewing, and deleting players.
-- **Team Management System** to assign players to teams, track team details, and manage rosters.
-- **Game Records** with detailed statistics such as match scores, durations, and locations.
-- **Interactive Statistics Dashboard** with interactive charts for easy visualization of data trends.
-- **Light/Dark Theme Support** for a customizable user experience.
-- **Real-Time Data Validation** ensuring correct data input with live feedback.
-- **Responsive Design** for seamless use on any device, including desktops, tablets, and smartphones.
+- Comprehensive player database management
+- Precise tracking of team information
+- Advanced match statistics analysis
 
-## Architecture
+## Key Features
+### 1. Player Management
+- Full CRUD functionality (Create, Read, Update, Delete)
+- Assigning players to teams
+- Verification of player deletion feasibility
 
-graph TD
-    A[Frontend React App] --> B[React Query]
-    B --> C[JSON Server API]
-    C --> D[(JSON Database)]
-    style A fill:#f9f,stroke:#333,stroke-width:2px
-    style B fill:#bbf,stroke:#333,stroke-width:2px
-    style C fill:#dfd,stroke:#333,stroke-width:2px
-    style D fill:#fdd,stroke:#333,stroke-width:2px
-# Tech Stack
+### 2. Team Management
+- Adding and editing teams
+- Comprehensive squad management
+- Control over team participation in competitions
 
-| Technology           | Purpose                                      |
-|----------------------|----------------------------------------------|
-| React                | Frontend framework                           |
-| React Query          | Data fetching and cache management           |
-| Styled Components    | Styling and theming                          |
-| JSON Server          | Backend mock API                             |
-| ESLint               | Code quality and style enforcement           |
-| Husky                | Git hooks for code quality                   |
+### 3. Match Registration
+- Detailed match documentation
+- Entering results
+- Tracking match parameters
 
-## Local Development
+### 4. Advanced Analytics
+- Interactive statistical visualizations
+- Team performance reports
+- Historical trend analysis
 
-Prerequisites: Node.js v20.
+## Technical Requirements
+### Technologies
+- React with TypeScript
+- React Query
+- Styled Components
+- JSON Server
+- Chart.js
 
-git clone https://github.com/your-username/car-configurator
-cd vite-project
+### Environment Configuration
+- Automatic code formatting (Prettier)
+- Static code analysis (ESLint)
+- Git Hooks (Husky)
+- Continuous Integration
 
-# Install dependencies
+## Database Structure
+### Collections
+#### Players
+- First Name
+- Last Name
+- Team Affiliation
 
-npm install
+#### Teams
+- Name
+- Year of Establishment
+- Location
+- Player Roster
 
-# Start JSON server (in a separate terminal)
+#### Games
+- Date
+- Title
+- Location
+- Duration
+- Results
+- Participating Teams
 
-json-server --watch db.json --port 3000
+## User Interface
+### Sections
+- Players
+- Teams
+- Matches
+- Statistics
 
-# Start development server
+### Key UI Features
+- Responsive design
+- Light/Dark mode
+- Interactive tables
+- Data validation
+- Action confirmation dialogs
 
-npm run start
-    ```
+## Development Plans
+### Short-Term
+- Expansion of the statistics system
+- Implementation of data export
+- Performance optimization
 
-# Available Scripts
+### Long-Term
+- Mobile version
+- Ranking system
+- Advanced trend analysis
 
-| Script               | Description                                  |
-|----------------------|----------------------------------------------|
-| `npm run dev`         | Starts development server                    |
-| `npm run build`       | Creates production build                     |
-| `npm run server`      | Starts JSON Server                           |
-| `npm run lint`        | Runs ESLint to check code quality            |
-| `npm run lint:fix`    | Automatically fixes fixable ESLint issues    |
-| `npm test`            | Runs test suite                              |
-| `npm run format`      | Formats code with Prettier                   |
+## Project Setup
+### Available Scripts
+| Script | Description |
+|--------|------------|
+| `npm run dev` | Starts the development server |
+| `npm run build` | Builds the production version |
+| `npm run server` | Starts the JSON Server |
+| `npm run lint` | Runs code analysis |
+| `npm run test` | Runs tests |
 
-# Implementation Details
-
-## Completed Features
-
-### Database Structure
-- **Players** collection with fields: name, surname, team relation.
-- **Teams** collection with fields: name, founding year, location.
-- **Games** collection with fields: date, title, location, duration, and scores.
-
-### User Interface
-- Four main tabs: Players, Teams, Games, and Statistics.
-- Full CRUD operations for players and teams.
-- Game Management system for tracking match details.
-- Statistics Dashboard that visualizes data with interactive charts.
-
-### Data Validation
-- **Form Validation**: Ensures that all input fields adhere to correct data formats and constraints.
-- **Business Logic Validation**: Prevents actions like deleting players from active teams or assigning invalid data.
-
-### UI/UX
-- **Light/Dark Theme Implementation**: Users can toggle between light and dark themes for a personalized experience.
-- **Responsive Design**: The layout adapts to any screen size, ensuring a great experience on all devices.
-- **Interactive Data Tables**: Users can sort, filter, and interact with player and game data.
-- **Confirmation Dialogs**: Critical actions such as deleting players or teams require user confirmation to prevent accidental actions.
-
-## Future Plans
-
-### Enhanced Statistics
-- **Advanced Analytics Dashboard**: To provide deeper insights into team and player performance.
-- **Player Performance Metrics**: Track and display individual player statistics like goals, assists, and other key performance indicators.
-- **Team Ranking System**: Introduce rankings based on various performance metrics.
-- **Historical Trend Analysis**: Visualize how team or player performance has evolved over time.
-
-### Feature Additions
-- **Export Functionality**: Allow users to export game and player data into CSV, PDF, or Excel formats.
-- **Player Transfer History**: Track player transfers between teams and store transfer details.
-- **Tournament Management**: Create and manage tournaments with teams, game schedules, and results.
-- **Mobile Application**: Build a mobile version of the app for iOS and Android platforms.
-
-### Technical Improvements
-- **Real-Time Updates**: Implement WebSockets or similar technologies for real-time updates when game stats are modified.
-- **Performance Optimizations**: Improve app performance, especially in loading times and responsiveness.
-- **Automated Testing**: Set up unit, integration, and end-to-end tests to ensure app stability.
-- **CI/CD Pipeline**: Implement Continuous Integration and Continuous Deployment pipelines for automated builds and deployments.
-
-# Live Demo
-[Coming Soon]
-
-# Author Contact
-- LinkedIn: [Your LinkedIn]
-- Email: [Your Email]
-- GitHub: [Your GitHub]
+Email: tomek12olech@gmail.com  
+GitHub: [takimi12](https://github.com/takimi12)  
+LinkedIn:
 
 
+## Opis projektu
+Football App to  aplikacja webowa przeznaczona dla trenerów, analityków sportowych i menedżerów drużyn, która kompleksowo wspiera zarządzanie zespołami piłkarskimi poprzez intuicyjne narzędzia do monitorowania, analizy i administracji. Aplikacja jest realizowana w ramach kursu React od Frontowców, jest to 3/5 projektów.
 
-# O projekcie
+##  Cel Projektu
+Celem projektu jest stworzenie wydajnej i łatwej w użyciu platformy, która umożliwia:
 
-**Aplikacja do statystyk sportowych** to kompleksowa platforma zaprojektowana do zarządzania drużynami sportowymi, zawodnikami i statystykami meczów. Aplikacja oferuje intuicyjny interfejs do śledzenia wyników drużyn, zarządzania listami zawodników oraz analizy statystyk meczów za pomocą dynamicznych wizualizacji. Została stworzona, aby uprościć zarządzanie drużynami i analizę danych dla miłośników sportu, trenerów i analityków.
+- Kompleksowe zarządzanie bazą zawodników
+- Precyzyjne śledzenie informacji o drużynach
+- Zaawansowaną analizę statystyk meczowych
 
-## Funkcje
+##  Kluczowe Funkcjonalności
+### 1. Zarządzanie Zawodnikami
+- Pełna funkcjonalność CRUD (Create, Read, Update, Delete)
+- Przypisywanie zawodników do drużyn
+- Weryfikacja możliwości usunięcia zawodnika
 
-- **Zarządzanie bazą zawodników** z pełną funkcjonalnością CRUD do dodawania, aktualizowania, przeglądania i usuwania zawodników.
-- **System zarządzania drużynami** umożliwiający przypisywanie zawodników do drużyn, śledzenie szczegółów drużyny i zarządzanie składami.
-- **Rejestry meczów** z szczegółowymi statystykami, takimi jak wyniki meczów, czas trwania i lokalizacja.
-- **Interaktywna tablica statystyk** z interaktywnymi wykresami do łatwego wizualizowania trendów danych.
-- **Wsparcie dla trybu jasnego/ciemnego** dla spersonalizowanego doświadczenia użytkownika.
-- **Walidacja danych w czasie rzeczywistym** zapewniająca poprawność danych przy wprowadzaniu z natychmiastową informacją zwrotną.
-- **Responsywny design** umożliwiający płynne korzystanie z aplikacji na różnych urządzeniach, w tym na komputerach, tabletach i smartfonach.
+### 2. Zarządzanie Drużynami
+- Dodawanie i edycja drużyn
+- Kompleksowe zarządzanie składem
+- Kontrola udziału drużyn w rozgrywkach
 
-## Architektura
+### 3. Rejestracja Rozgrywek
+- Szczegółowa dokumentacja meczów
+- Wprowadzanie wyników
+- Śledzenie parametrów spotkań
 
-# Dostępne skrypty
+### 4. Zaawansowana Analityka
+- Interaktywne wizualizacje statystyk
+- Raporty wydajności drużyn
+- Analiza trendów historycznych
 
-| Skrypt               | Opis                                                       |
-|----------------------|------------------------------------------------------------|
-| `npm run dev`         | Uruchamia serwer deweloperski                               |
-| `npm run build`       | Tworzy wersję produkcyjną                                   |
-| `npm run server`      | Uruchamia JSON Server                                      |
-| `npm run lint`        | Uruchamia ESLint do sprawdzenia jakości kodu               |
-| `npm run lint:fix`    | Automatycznie naprawia napotkane problemy ESLint           |
-| `npm test`            | Uruchamia zestaw testów                                    |
-| `npm run format`      | Formatuje kod za pomocą Prettiera                          |
+##  Wymagania Techniczne
+### Technologie
+- React z TypeScript
+- React Query
+- Styled Components
+- JSON Server
+- Chart.js
 
-# Szczegóły implementacji
+### Konfiguracja Środowiska
+- Automatyczne formatowanie kodu (Prettier)
+- Statyczna analiza kodu (ESLint)
+- Git Hooks (Husky)
+- Continuous Integration
 
-## Zrealizowane funkcje
+## Struktura Bazy Danych
+### Kolekcje
+#### Players
+- Imię
+- Nazwisko
+- Przynależność drużynowa
 
-### Struktura bazy danych
-- **Kolekcja Players** z polami: imię, nazwisko, powiązanie z drużyną.
-- **Kolekcja Teams** z polami: nazwa, rok założenia, lokalizacja.
-- **Kolekcja Games** z polami: data, tytuł, lokalizacja, czas trwania, wyniki.
+#### Teams
+- Nazwa
+- Rok założenia
+- Lokalizacja
+- Skład zawodników
 
-### Interfejs użytkownika
-- Cztery główne zakładki: **Zawodnicy**, **Drużyny**, **Mecze** i **Statystyki**.
-- Pełne operacje CRUD dla zawodników i drużyn.
-- System zarządzania meczami do śledzenia szczegółów spotkań.
-- Tablica statystyk wizualizująca dane za pomocą interaktywnych wykresów.
+#### Games
+- Data
+- Tytuł
+- Lokalizacja
+- Czas trwania
+- Wyniki
+- Uczestniczące drużyny
 
-### Walidacja danych
-- **Walidacja formularzy**: Zapewnienie, że wszystkie pola wejściowe są zgodne z odpowiednimi formatami danych i ograniczeniami.
-- **Walidacja logiki biznesowej**: Zapobieganie akcjom takim jak usuwanie zawodników z aktywnych drużyn lub przypisywanie nieprawidłowych danych.
+##  Interfejs Użytkownika
+### Zakładki
+- Zawodnicy
+- Drużyny
+- Rozgrywki
+- Statystyki
 
-### UI/UX
-- **Implementacja trybu jasnego/ciemnego**: Użytkownicy mogą przełączać się między jasnym a ciemnym trybem dla spersonalizowanego doświadczenia.
-- **Responsywny design**: Układ dopasowuje się do rozmiaru ekranu, zapewniając świetne wrażenia na wszystkich urządzeniach.
-- **Interaktywne tabele danych**: Użytkownicy mogą sortować, filtrować i wchodzić w interakcję z danymi zawodników i meczów.
-- **Dialogi potwierdzenia**: Krytyczne akcje, takie jak usuwanie zawodników lub drużyn, wymagają potwierdzenia użytkownika, aby zapobiec przypadkowym działaniom.
+### Kluczowe Cechy UI
+- Responsywny design
+- Tryb jasny/ciemny
+- Interaktywne tabele
+- Walidacja danych
+- Dialogi potwierdzenia akcji
 
-# Plany na przyszłość
+##  Plany Rozwoju
+### Krótkoterminowe
+- Rozbudowa systemu statystyk
+- Implementacja eksportu danych
+- Optymalizacja wydajności
 
-## Rozszerzone statystyki
-- **Zaawansowana tablica statystyk**: Dostarczanie głębszych wglądów w wyniki drużyn i zawodników.
-- **Metryki wyników zawodników**: Śledzenie i wyświetlanie indywidualnych statystyk zawodników, takich jak bramki, asysty i inne wskaźniki wydajności.
-- **System rankingowy drużyn**: Wprowadzenie rankingów opartych na różnych wskaźnikach wydajności.
-- **Analiza trendów historycznych**: Wizualizacja, jak wydajność drużyn lub zawodników zmieniała się w czasie.
+### Długoterminowe
+- Wersja mobilna
+- System rankingowy
+- Zaawansowane analizy trendów
 
-## Dodanie funkcji
-- **Funkcjonalność eksportu**: Pozwoli użytkownikom eksportować dane o meczach i zawodnikach do formatów CSV, PDF lub Excel.
-- **Historia transferów zawodników**: Śledzenie transferów zawodników między drużynami i przechowywanie szczegółów transferów.
-- **Zarządzanie turniejami**: Tworzenie i zarządzanie turniejami z drużynami, harmonogramami meczów i wynikami.
-- **Aplikacja mobilna**: Stworzenie mobilnej wersji aplikacji na platformy iOS i Android.
+##  Uruchamianie Projektu
+### Dostępne Skrypty
+| Skrypt | Opis |
+|--------|------|
+| `npm run dev` | Uruchomienie serwera deweloperskiego |
+| `npm run build` | Kompilacja wersji produkcyjnej |
+| `npm run server` | Uruchomienie JSON Server |
+| `npm run lint` | Analiza kodu |
+| `npm run test` | Uruchomienie testów |
 
-## Poprawki techniczne
-- **Aktualizacje w czasie rzeczywistym**: Wprowadzenie WebSocketów lub podobnych technologii dla aktualizacji w czasie rzeczywistym, gdy dane o meczach są zmieniane.
-- **Optymalizacja wydajności**: Poprawa wydajności aplikacji, szczególnie w zakresie czasów ładowania i responsywności.
-- **Automatyczne testowanie**: Ustawienie testów jednostkowych, integracyjnych i end-to-end, aby zapewnić stabilność aplikacji.
-- **Pipeline CI/CD**: Implementacja pipeline'u Continuous Integration i Continuous Deployment dla zautomatyzowanych buildów i wdrożeń.
 
-# Demo na żywo
-[Wkrótce]
-
-# Kontakt z autorem
-- **LinkedIn**: [Twój LinkedIn]
-- **Email**: [Twój Email]
-- **GitHub**: [Twój GitHub]
+Email: tomek12olech@gmail.com
+GitHub: [takimi12](https://github.com/takimi12)
+LinkedIn:
