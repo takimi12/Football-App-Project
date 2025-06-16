@@ -5,7 +5,9 @@ export const useGetMatchMongo = () => {
 	const { data, refetch, isLoading, error } = useQuery<Match[]>({
 		queryKey: ['matches'],
 		queryFn: async () => {
-			const response = await fetch('car-configurator-eight.vercel.app/matches') 
+			const response = await fetch(
+				'car-configurator-eight.vercel.app/matches',
+			)
 			if (!response.ok) {
 				throw new Error('Failed to fetch matches')
 			}

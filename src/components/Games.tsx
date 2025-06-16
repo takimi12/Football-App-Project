@@ -810,7 +810,9 @@ export const Games: React.FC = () => {
 									Edit
 								</EditButton>
 								<DeleteButton
-									onClick={() => handleDelete(match._id ?? "")}
+									onClick={() =>
+										handleDelete(match._id ?? '')
+									}
 								>
 									Delete
 								</DeleteButton>
