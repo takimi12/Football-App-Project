@@ -1,7 +1,7 @@
 import { MongoClient } from 'mongodb'
 import type { NextApiRequest, NextApiResponse } from 'next'
 
-const client = new MongoClient(process.env.MONGO_URI as string)
+const client = new MongoClient("mongodb+srv://tomek12olech:7MytflC2STM5Wroe@cluster.etrcyrp.mongodb.net/?retryWrites=true&w=majority&appName=Cluster")
 const dbName = 'myDatabase'
 
 export default async function handler(
