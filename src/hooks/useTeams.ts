@@ -5,7 +5,7 @@ export const useTeams = () => {
 	const { data, refetch } = useQuery<Team[]>({
 		queryKey: ['teams'],
 		queryFn: async () => {
-			const response = await fetch('http://localhost:3000/teams')
+			const response = await fetch('http://localhost:3001/teams')
 			return response.json()
 		},
 	})

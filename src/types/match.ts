@@ -1,5 +1,5 @@
 export interface Match {
-	id: string
+	_id?: string
 	team1Id: string
 	team1Name: string
 	team2Id: string
