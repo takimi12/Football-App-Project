@@ -1,6 +1,7 @@
 const { MongoClient } = require('mongodb');
 
-const uri = 'mongodb+srv://tomek12olech:7MytflC2STM5Wroe@cluster.etrcyrp.mongodb.net/myDatabase?retryWrites=true&tls=true';
+const uri =
+  'mongodb+srv://tomek12olech:7MytflC2STM5Wroe@cluster.etrcyrp.mongodb.net/myDatabase?retryWrites=true&w=majority';
 
 let cachedClient = null;
 
