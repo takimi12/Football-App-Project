@@ -1,17 +1,25 @@
 const { MongoClient } = require('mongodb');
 
-const uri =
-  'mongodb+srv://tomek12olech:7MytflC2STM5Wroe@cluster.etrcyrp.mongodb.net/?retryWrites=true&w=majority&appName=Cluster';
+const uri = 'mongodb+srv://tomek12olech:7MytflC2STM5Wroe@cluster.etrcyrp.mongodb.net/myDatabase?retryWrites=true&tls=true';
 
-const client = new MongoClient(uri);
-const dbName = 'myDatabase';
+let cachedClient = null;
 
 module.exports = async (req, res) => {
-  try {
-    await client.connect();
-    const db = client.db(dbName);
-    const matches = db.collection('matches');
+  if (!cachedClient) {
+    try {
+      const client = new MongoClient(uri);
+      await client.connect();
+      cachedClient = client;
+    } catch (err) {
+      console.error('❌ MongoDB connection error:', err);
+      return res.status(500).json({ error: 'Failed to connect to database' });
+    }
+  }
 
+  const db = cachedClient.db('myDatabase');
+  const matches = db.collection('matches');
+
+  try {
     if (req.method === 'POST') {
       const result = await matches.insertOne(req.body);
       return res.status(201).json({ insertedId: result.insertedId });
@@ -24,10 +32,8 @@ module.exports = async (req, res) => {
 
     res.setHeader('Allow', ['GET', 'POST']);
     return res.status(405).end(`Method ${req.method} Not Allowed`);
-  } catch (error) {
-    console.error('API error:', error);
+  } catch (err) {
+    console.error('❌ API handler error:', err);
     return res.status(500).json({ error: 'Internal Server Error' });
-  } finally {
-    await client.close();
   }
 };
