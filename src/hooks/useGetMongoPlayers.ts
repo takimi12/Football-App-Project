@@ -5,7 +5,9 @@ export const usePlayers = () => {
 	const { data, refetch } = useQuery<Player[]>({
 		queryKey: ['players'],
 		queryFn: async () => {
-			const response = await fetch('https://football-app-project-fhr7.vercel.app/api/players')
+			const response = await fetch(
+				'https://football-app-project-fhr7.vercel.app/api/players',
+			)
 			return response.json()
 		},
 	})

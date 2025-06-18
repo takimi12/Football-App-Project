@@ -32,7 +32,6 @@ export const useAddOrEditPlayer = (refetch: () => void) => {
 		if (!validate()) return
 
 		try {
-            
 			const method = editingPlayer ? 'PUT' : 'POST'
 			const url = editingPlayer
 				? `https://football-app-project-fhr7.vercel.app/api/players/${editingPlayer.id}`

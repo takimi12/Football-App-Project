@@ -136,7 +136,8 @@ const DeleteButton = styled.button`
 	}
 
 	&:disabled {
-		background-color: ${({ theme }) => theme.deleteButtonDisabledBackground};
+		background-color: ${({ theme }) =>
+			theme.deleteButtonDisabledBackground};
 		cursor: not-allowed;
 	}
 `
@@ -176,7 +177,9 @@ export const Players = () => {
 					onChange={handleInputChange}
 					placeholder="First Name"
 				/>
-				{errors.firstName && <ErrorMessage>{errors.firstName}</ErrorMessage>}
+				{errors.firstName && (
+					<ErrorMessage>{errors.firstName}</ErrorMessage>
+				)}
 			</FormField>
 			<FormField>
 				<Input
@@ -186,7 +189,9 @@ export const Players = () => {
 					onChange={handleInputChange}
 					placeholder="Last Name"
 				/>
-				{errors.lastName && <ErrorMessage>{errors.lastName}</ErrorMessage>}
+				{errors.lastName && (
+					<ErrorMessage>{errors.lastName}</ErrorMessage>
+				)}
 			</FormField>
 			<Button type="submit">
 				{editingPlayer ? 'Update Player' : 'Add Player'}
@@ -213,30 +218,39 @@ export const Players = () => {
 								<PlayerInfo>
 									<div>
 										<PlayerLabel>First Name</PlayerLabel>
-										<PlayerText>{player.firstName}</PlayerText>
+										<PlayerText>
+											{player.firstName}
+										</PlayerText>
 									</div>
 									<div>
 										<PlayerLabel>Last Name</PlayerLabel>
-										<PlayerText>{player.lastName}</PlayerText>
+										<PlayerText>
+											{player.lastName}
+										</PlayerText>
 									</div>
 									<div>
 										<PlayerLabel>Team</PlayerLabel>
 										<PlayerText>
 											{playerInTeam
 												? teams?.find((team) =>
-														team.players.includes(player.id),
+														team.players.includes(
+															player.id,
+														),
 													)?.name
 												: 'No team'}
 										</PlayerText>
 									</div>
 								</PlayerInfo>
 								<div>
-									<EditButton onClick={() => handleEdit(player)}>
+									<EditButton
+										onClick={() => handleEdit(player)}
+									>
 										Edit
 									</EditButton>
 									{playerInTeam ? (
 										<PlayerCannotDeleteMessage>
-											Nie można usunąć zawodnika należącego do drużyny
+											Nie można usunąć zawodnika
+											należącego do drużyny
 										</PlayerCannotDeleteMessage>
 									) : (
 										<DeleteButton

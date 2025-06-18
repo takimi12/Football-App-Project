@@ -52,7 +52,7 @@ module.exports = async (req, res) => {
 		if (method === 'PUT') {
 			const result = await players.updateOne(
 				{ _id: objectId },
-				{ $set: req.body }
+				{ $set: req.body },
 			)
 			return res.status(200).json({ updated: result.modifiedCount })
 		}
