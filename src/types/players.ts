@@ -1,4 +1,4 @@
-export interface Player {
+export interface PlayerMongo {
 	_id: string
 	firstName: string
 	lastName: string

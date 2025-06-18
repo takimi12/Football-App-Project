@@ -3,7 +3,7 @@ import { useMongoPlayers } from '../hooks/useGetMongoPlayers'
 import { useTeams } from '../hooks/useTeams'
 import { useAddOrEditMongoPlayer } from '../hooks/useAddOrEditMongoPlayer'
 import { useDeleteMongoPlayer } from '../hooks/useDeleteMongoPlayer'
-import { Player } from '../types/players'
+import { PlayerMongo } from '../types/players'
 import styled from 'styled-components'
 
 const PlayersContainer = styled.div`
@@ -208,7 +208,7 @@ export const Players = () => {
 				<p>Brak zawodników w bazie. Dodaj pierwszego zawodnika.</p>
 			) : (
 				<PlayersList>
-					{data.map((player: Player) => {
+					{data.map((player: PlayerMongo) => {
 						const playerInTeam = teams?.some((team) =>
 							team.players.includes(player._id),
 						)

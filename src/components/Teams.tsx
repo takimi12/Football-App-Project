@@ -1,13 +1,14 @@
 import React from 'react'
 import { useMongoPlayers } from '../hooks/useGetMongoPlayers'
-import { useTeams } from '../hooks/useTeams'
-import { useAddTeam } from '../hooks/mutationTeams'
 import { useState } from 'react'
-import { Player } from '../types/players'
-import { Team } from '../types/teams'
-import { useUpdateTeam } from '../hooks/useUpdateTeam'
-import { useGetMatches } from '../hooks/useGetMatch'
-import { useDeleteTeam } from '../hooks/useDeleteTeam'
+import { PlayerMongo } from '../types/players'
+import { TeamMongo} from '../types/teams'
+import { useGetMatchMongo } from '../hooks/useGetMatchMongo'
+
+import { useGetTeamsMongo } from '../hooks/useGetTeamsMongo'
+import { useAddTeamMongo } from '../hooks/useAddTeamMongo'
+import { useUpdateTeamMongo } from '../hooks/useUpdateTeamMongo'
+import { useDeleteTeamMongo } from '../hooks/useDeleteTeamMongo'
 import styled from 'styled-components'
 
 const Container = styled.div`
@@ -148,18 +149,18 @@ const TeamInfo = styled.div`
 `
 
 export const Teams = () => {
-	const { teams } = useTeams()
+	const { teams } = useGetTeamsMongo()
 	const { data: availablePlayers = [] } = useMongoPlayers()
-	const addTeamMutation = useAddTeam()
-	const updateTeamMutation = useUpdateTeam()
-	const deleteTeamMutation = useDeleteTeam()
-	const { matches } = useGetMatches()
+	const addTeamMutation = useAddTeamMongo()
+	const updateTeamMutation = useUpdateTeamMongo()
+	const deleteTeamMutation = useDeleteTeamMongo()
+	const { matches } = useGetMatchMongo()
 
 	const [newTeam, setNewTeam] = useState({
 		name: '',
 		yearFounded: '',
 		location: '',
-		players: [] as Player[],
+		players: [] as PlayerMongo[],
 	})
 	const [errors, setErrors] = useState({
 		name: '',
@@ -167,14 +168,14 @@ export const Teams = () => {
 		location: '',
 		players: '',
 	})
-	const [editingTeam, setEditingTeam] = useState<Team | null>(null)
+	const [editingTeam, setEditingTeam] = useState<TeamMongo | null>(null)
 
-	const handleEditTeam = (team: Team) => {
+	const handleEditTeam = (team: TeamMongo) => {
 		const players = team.players
 			.map((playerId) =>
 				availablePlayers.find((player) => player._id === playerId),
 			)
-			.filter(Boolean) as Player[]
+			.filter(Boolean) as PlayerMongo[]
 
 		setEditingTeam(team)
 		setNewTeam({
@@ -202,7 +203,7 @@ export const Teams = () => {
 			}
 
 			if (editingTeam) {
-				updateTeamMutation.mutate({ id: editingTeam.id, ...teamToSave })
+				updateTeamMutation.mutate({ _id: editingTeam._id, ...teamToSave })
 			} else {
 				addTeamMutation.mutate(teamToSave)
 			}
@@ -421,7 +422,7 @@ export const Teams = () => {
 			</FormContainer>
 
 			{teams?.map((team) => (
-				<TeamContainer key={team.id}>
+				<TeamContainer key={team._id}>
 					<TeamInfo>
 						<p>
 							<strong>Nazwa:</strong> {team.name}
@@ -446,17 +447,17 @@ export const Teams = () => {
 							Edytuj
 						</EditButton>
 						<DeleteButton
-							onClick={() => handleDeleteTeam(team.id)}
+							onClick={() => handleDeleteTeam(team._id)}
 							disabled={matches?.some(
 								(match) =>
-									match.team1Id === team.id ||
-									match.team2Id === team.id,
+									match.team1Id === team._id ||
+									match.team2Id === team._id,
 							)}
 						>
 							{matches?.some(
 								(match) =>
-									match.team1Id === team.id ||
-									match.team2Id === team.id,
+									match.team1Id === team._id ||
+									match.team2Id === team._id,
 							)
 								? 'Nie można usunąć drużyny biorącej udział w rozgrywkach'
 								: 'Usuń'}
