@@ -1,5 +1,5 @@
 import React from 'react'
-import { usePlayers } from '../hooks/usePlayers'
+import { usePlayers } from '../hooks/useGetPlayers'
 import { useTeams } from '../hooks/useTeams'
 import { useAddTeam } from '../hooks/mutationTeams'
 import { useState } from 'react'

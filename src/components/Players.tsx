@@ -1,6 +1,8 @@
-import React, { useState } from 'react'
-import { usePlayers } from '../hooks/usePlayers'
+import React from 'react'
+import { usePlayers } from '../hooks/useGetPlayers'
 import { useTeams } from '../hooks/useTeams'
+import { useAddOrEditPlayer } from '../hooks/useAddOrEditPlayer'
+import { useDeletePlayer } from '../hooks/useDeletePlayer'
 import { Player } from '../types/players'
 import styled from 'styled-components'
 
@@ -134,8 +136,7 @@ const DeleteButton = styled.button`
 	}
 
 	&:disabled {
-		background-color: ${({ theme }) =>
-			theme.deleteButtonDisabledBackground};
+		background-color: ${({ theme }) => theme.deleteButtonDisabledBackground};
 		cursor: not-allowed;
 	}
 `
@@ -151,107 +152,21 @@ const PlayerCannotDeleteMessage = styled.p`
 export const Players = () => {
 	const { data, refetch } = usePlayers()
 	const { teams } = useTeams()
-	const [newPlayer, setNewPlayer] = useState({
-		firstName: '',
-		lastName: '',
-	})
-	const [editingPlayer, setEditingPlayer] = useState<Player | null>(null)
-	const [errors, setErrors] = useState({
-		firstName: '',
-		lastName: '',
-	})
 
-	if (!data) return <p>No data available</p>
+	const {
+		newPlayer,
+		editingPlayer,
+		errors,
+		handleInputChange,
+		handleSubmit,
+		handleEdit,
+	} = useAddOrEditPlayer(refetch)
 
-	const handleInputChange = (
-		e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>,
-	) => {
-		const { name, value } = e.target
-		setNewPlayer((prev) => ({
-			...prev,
-			[name]: value,
-		}))
-		setErrors((prev) => ({
-			...prev,
-			[name]: '',
-		}))
-	}
+	const { handleDelete } = useDeletePlayer(teams, refetch)
 
-	const handleSubmit = async (e: React.FormEvent) => {
-		e.preventDefault()
+	const isDataEmpty = !data || data.length === 0
 
-		const newErrors = {
-			firstName: '',
-			lastName: '',
-		}
-
-		if (newPlayer.firstName.length < 3 || newPlayer.firstName.length > 10) {
-			newErrors.firstName = 'Imię musi mieć od 3 do 10 liter.'
-		}
-
-		if (newPlayer.lastName.length < 3 || newPlayer.lastName.length > 10) {
-			newErrors.lastName = 'Nazwisko musi mieć od 3 do 10 liter.'
-		}
-
-		if (newErrors.firstName || newErrors.lastName) {
-			setErrors(newErrors)
-			return
-		}
-
-		try {
-			const method = editingPlayer ? 'PUT' : 'POST'
-			const url = editingPlayer
-				? `http://localhost:3000/players/${editingPlayer.id}`
-				: 'http://localhost:3000/players'
-
-			await fetch(url, {
-				method,
-				headers: {
-					'Content-Type': 'application/json',
-				},
-				body: JSON.stringify(newPlayer),
-			})
-
-			refetch()
-			setNewPlayer({ firstName: '', lastName: '' })
-		} catch (error) {
-			console.error('Failed to add/edit player:', error)
-		}
-	}
-
-	const handleEdit = (player: Player) => {
-		setEditingPlayer(player)
-		setNewPlayer({
-			firstName: player.firstName,
-			lastName: player.lastName,
-		})
-	}
-
-	const handleDelete = async (player: Player) => {
-		const isInTeam = teams?.some((team) => team.players.includes(player.id))
-		if (isInTeam) {
-			alert(
-				'Nie można usunąć zawodnika, który jest przypisany do drużyny.',
-			)
-			return
-		}
-
-		const confirmDeleteAction = window.confirm(
-			`Czy na pewno chcesz usunąć gracza ${player.firstName} ${player.lastName}?`,
-		)
-		if (confirmDeleteAction) {
-			try {
-				await fetch(`http://localhost:3000/players/${player.id}`, {
-					method: 'DELETE',
-				})
-				refetch()
-			} catch (error) {
-				console.error('Failed to delete player:', error)
-			}
-		}
-	}
-
-	const renderAddPlayerForm = () => (
+	const renderForm = () => (
 		<Form onSubmit={handleSubmit}>
 			<FormField>
 				<Input
@@ -261,9 +176,7 @@ export const Players = () => {
 					onChange={handleInputChange}
 					placeholder="First Name"
 				/>
-				{errors.firstName && (
-					<ErrorMessage>{errors.firstName}</ErrorMessage>
-				)}
+				{errors.firstName && <ErrorMessage>{errors.firstName}</ErrorMessage>}
 			</FormField>
 			<FormField>
 				<Input
@@ -273,106 +186,72 @@ export const Players = () => {
 					onChange={handleInputChange}
 					placeholder="Last Name"
 				/>
-				{errors.lastName && (
-					<ErrorMessage>{errors.lastName}</ErrorMessage>
-				)}
+				{errors.lastName && <ErrorMessage>{errors.lastName}</ErrorMessage>}
 			</FormField>
-			<Button type="submit">Add Player</Button>
-		</Form>
-	)
-
-	const renderEditPlayerForm = () => (
-		<Form onSubmit={handleSubmit}>
-			<FormField>
-				<Input
-					type="text"
-					name="firstName"
-					value={newPlayer.firstName}
-					onChange={handleInputChange}
-					placeholder="First Name"
-					required
-				/>
-				{errors.firstName && (
-					<ErrorMessage>{errors.firstName}</ErrorMessage>
-				)}
-			</FormField>
-			<FormField>
-				<Input
-					type="text"
-					name="lastName"
-					value={newPlayer.lastName}
-					onChange={handleInputChange}
-					placeholder="Last Name"
-					required
-				/>
-				{errors.lastName && (
-					<ErrorMessage>{errors.lastName}</ErrorMessage>
-				)}
-			</FormField>
-			<Button type="submit">Update Player</Button>
+			<Button type="submit">
+				{editingPlayer ? 'Update Player' : 'Add Player'}
+			</Button>
 		</Form>
 	)
 
 	return (
 		<PlayersContainer>
 			<Title>Players</Title>
+			{renderForm()}
 
-			{editingPlayer ? renderEditPlayerForm() : renderAddPlayerForm()}
+			{isDataEmpty ? (
+				<p>Brak zawodników w bazie. Dodaj pierwszego zawodnika.</p>
+			) : (
+				<PlayersList>
+					{data.map((player: Player) => {
+						const playerInTeam = teams?.some((team) =>
+							team.players.includes(player.id),
+						)
 
-			<PlayersList>
-				{data.map((el) => {
-					const playerInTeam = teams?.some((team) =>
-						team.players.includes(el.id),
-					)
-
-					return (
-						<PlayerItem key={el.id}>
-							<PlayerInfo>
+						return (
+							<PlayerItem key={player.id}>
+								<PlayerInfo>
+									<div>
+										<PlayerLabel>First Name</PlayerLabel>
+										<PlayerText>{player.firstName}</PlayerText>
+									</div>
+									<div>
+										<PlayerLabel>Last Name</PlayerLabel>
+										<PlayerText>{player.lastName}</PlayerText>
+									</div>
+									<div>
+										<PlayerLabel>Team</PlayerLabel>
+										<PlayerText>
+											{playerInTeam
+												? teams?.find((team) =>
+														team.players.includes(player.id),
+													)?.name
+												: 'No team'}
+										</PlayerText>
+									</div>
+								</PlayerInfo>
 								<div>
-									<PlayerLabel>First Name</PlayerLabel>
-									<PlayerText>{el.firstName}</PlayerText>
+									<EditButton onClick={() => handleEdit(player)}>
+										Edit
+									</EditButton>
+									{playerInTeam ? (
+										<PlayerCannotDeleteMessage>
+											Nie można usunąć zawodnika należącego do drużyny
+										</PlayerCannotDeleteMessage>
+									) : (
+										<DeleteButton
+											onClick={() => handleDelete(player)}
+											disabled={playerInTeam}
+										>
+											Delete
+										</DeleteButton>
+									)}
 								</div>
-								<div>
-									<PlayerLabel>Last Name</PlayerLabel>
-									<PlayerText>{el.lastName}</PlayerText>
-								</div>
-								<div>
-									<PlayerLabel>Team</PlayerLabel>
-									<PlayerText>
-										{playerInTeam
-											? teams?.find((team) =>
-													team.players.includes(
-														el.id,
-													),
-												)?.name
-											: 'No team'}
-									</PlayerText>
-								</div>
-							</PlayerInfo>
-							<div>
-								<EditButton onClick={() => handleEdit(el)}>
-									Edit
-								</EditButton>
-								{playerInTeam ? (
-									<PlayerCannotDeleteMessage>
-										Nie mozna usunąć zawodnika nalezacego do
-										druzyny
-									</PlayerCannotDeleteMessage>
-								) : (
-									<DeleteButton
-										onClick={() => handleDelete(el)}
-										disabled={playerInTeam}
-									>
-										{playerInTeam
-											? 'Nie mona usunąć zawodnika nalezacego do druzyny'
-											: 'Delete'}
-									</DeleteButton>
-								)}
-							</div>
-						</PlayerItem>
-					)
-				})}
-			</PlayersList>
+							</PlayerItem>
+						)
+					})}
+				</PlayersList>
+			)}
 		</PlayersContainer>
 	)
 }
