@@ -34,7 +34,7 @@ export const useAddOrEditMongoPlayer = (refetch: () => void) => {
 		try {
 			const method = editingPlayer ? 'PUT' : 'POST'
 			const url = editingPlayer
-				? `https://football-app-project-fhr7.vercel.app/api/players/${editingPlayer.id}`
+				? `https://football-app-project-fhr7.vercel.app/api/players/${editingPlayer._id}`
 				: 'https://football-app-project-fhr7.vercel.app/api/players'
 
 			await fetch(url, {

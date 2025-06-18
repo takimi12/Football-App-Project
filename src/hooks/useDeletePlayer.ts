@@ -6,7 +6,7 @@ export const useDeletePlayer = (
 	refetch: () => void,
 ) => {
 	const handleDelete = async (player: Player) => {
-		const isInTeam = teams?.some((team) => team.players.includes(player.id))
+		const isInTeam = teams?.some((team) => team.players.includes(player._id))
 		if (isInTeam) {
 			alert(
 				'Nie można usunąć zawodnika, który jest przypisany do drużyny.',
@@ -19,7 +19,7 @@ export const useDeletePlayer = (
 		)
 		if (confirmDeleteAction) {
 			try {
-				await fetch(`http://localhost:3001/player/${player.id}`, {
+				await fetch(`http://localhost:3001/player/${player._id}`, {
 					method: 'DELETE',
 				})
 				refetch()

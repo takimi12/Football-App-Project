@@ -153,8 +153,7 @@ const PlayerCannotDeleteMessage = styled.p`
 export const Players = () => {
 	const { data, refetch } = useMongoPlayers()
 	const { teams } = useTeams()
-	
-	console.log(data,'data')
+
 
 	const {
 		newPlayer,
@@ -212,11 +211,11 @@ export const Players = () => {
 				<PlayersList>
 					{data.map((player: Player) => {
 						const playerInTeam = teams?.some((team) =>
-							team.players.includes(player.id),
+							team.players.includes(player._id),
 						)
 
 						return (
-							<PlayerItem key={player.id}>
+							<PlayerItem key={player._id}>
 								<PlayerInfo>
 									<div>
 										<PlayerLabel>First Name</PlayerLabel>
@@ -236,7 +235,7 @@ export const Players = () => {
 											{playerInTeam
 												? teams?.find((team) =>
 														team.players.includes(
-															player.id,
+															player._id,
 														),
 													)?.name
 												: 'No team'}
