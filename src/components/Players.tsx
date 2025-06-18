@@ -153,6 +153,8 @@ const PlayerCannotDeleteMessage = styled.p`
 export const Players = () => {
 	const { data, refetch } = useMongoPlayers()
 	const { teams } = useTeams()
+	
+	console.log(data,'data')
 
 	const {
 		newPlayer,

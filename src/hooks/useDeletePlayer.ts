@@ -19,12 +19,9 @@ export const useDeletePlayer = (
 		)
 		if (confirmDeleteAction) {
 			try {
-				await fetch(
-					`http://localhost:3001/player/${player.id}`,
-					{
-						method: 'DELETE',
-					},
-				)
+				await fetch(`http://localhost:3001/player/${player.id}`, {
+					method: 'DELETE',
+				})
 				refetch()
 			} catch (error) {
 				console.error('Failed to delete player:', error)

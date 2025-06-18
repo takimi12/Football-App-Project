@@ -22,7 +22,6 @@ export const useDeleteMongoPlayer = (
 				await fetch(
 					`https://football-app-project-fhr7.vercel.app/api/players/${player.id}`,
 					{
-						
 						method: 'DELETE',
 					},
 				)
