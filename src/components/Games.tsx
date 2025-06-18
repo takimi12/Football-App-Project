@@ -561,7 +561,6 @@ export const Games: React.FC = () => {
 	const { refetch, matches } = useGetMatchMongo()
 	const { mutate: updateMatch } = useUpdateMatchMongo()
 	const { mutate: deleteMatchMongo } = useDeleteMatchMongo()
-	console.log(matches, 'matches')
 	const [matchId, setMatchId] = useState<string | null>(null)
 	const [team1Id, setTeam1Id] = useState<string>('')
 	const [team2Id, setTeam2Id] = useState<string>('')

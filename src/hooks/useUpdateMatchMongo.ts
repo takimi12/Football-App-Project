@@ -12,7 +12,7 @@ const updateMatchMongo = async (matchData: {
 }) => {
 	const { matchId, ...updatedData } = matchData
 
-	const response = await fetch(`http://localhost:3002/matches/${matchId}`, {
+	const response = await fetch(`https://football-app-project-fhr7.vercel.app//api/matches/${matchId}`, {
 		method: 'PUT',
 		headers: {
 			'Content-Type': 'application/json',
