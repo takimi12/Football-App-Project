@@ -4,3 +4,9 @@ export interface Player {
 	lastName: string
 	teamId: string | null
 }
+export interface PlayerLocal {
+	id: string
+	firstName: string
+	lastName: string
+	teamId: string | null
+}

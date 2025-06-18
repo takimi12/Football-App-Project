@@ -1,9 +1,9 @@
 import { useState } from 'react'
-import { Player } from '../types/players'
+import { PlayerLocal } from '../types/players'
 
 export const useAddOrEditPlayer = (refetch: () => void) => {
 	const [newPlayer, setNewPlayer] = useState({ firstName: '', lastName: '' })
-	const [editingPlayer, setEditingPlayer] = useState<Player | null>(null)
+	const [editingPlayer, setEditingPlayer] = useState<PlayerLocal | null>(null)
 	const [errors, setErrors] = useState({ firstName: '', lastName: '' })
 
 	const validate = () => {
@@ -51,7 +51,7 @@ export const useAddOrEditPlayer = (refetch: () => void) => {
 		}
 	}
 
-	const handleEdit = (player: Player) => {
+	const handleEdit = (player: PlayerLocal) => {
 		setEditingPlayer(player)
 		setNewPlayer({ firstName: player.firstName, lastName: player.lastName })
 	}
