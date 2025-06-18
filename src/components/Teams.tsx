@@ -1,5 +1,5 @@
 import React from 'react'
-import { usePlayers } from '../hooks/useGetPlayers'
+import { useMongoPlayers } from '../hooks/useGetMongoPlayers'
 import { useTeams } from '../hooks/useTeams'
 import { useAddTeam } from '../hooks/mutationTeams'
 import { useState } from 'react'
@@ -149,7 +149,7 @@ const TeamInfo = styled.div`
 
 export const Teams = () => {
 	const { teams } = useTeams()
-	const { data: availablePlayers = [] } = usePlayers()
+	const { data: availablePlayers = [] } = useMongoPlayers()
 	const addTeamMutation = useAddTeam()
 	const updateTeamMutation = useUpdateTeam()
 	const deleteTeamMutation = useDeleteTeam()
@@ -172,7 +172,7 @@ export const Teams = () => {
 	const handleEditTeam = (team: Team) => {
 		const players = team.players
 			.map((playerId) =>
-				availablePlayers.find((player) => player.id === playerId),
+				availablePlayers.find((player) => player._id === playerId),
 			)
 			.filter(Boolean) as Player[]
 
@@ -198,7 +198,7 @@ export const Teams = () => {
 			const teamToSave = {
 				...newTeam,
 				yearFounded: parseInt(newTeam.yearFounded, 10),
-				players: newTeam.players.map((player) => player.id),
+				players: newTeam.players.map((player) => player._id),
 			}
 
 			if (editingTeam) {
@@ -224,7 +224,7 @@ export const Teams = () => {
 				players: [
 					...prev.players,
 					{
-						id: 'none',
+						_id: 'none',
 						firstName: 'brak',
 						lastName: 'zawodnika',
 						teamId: null,
@@ -235,7 +235,7 @@ export const Teams = () => {
 		}
 
 		const selectedPlayer = availablePlayers.find(
-			(player) => player.id === selectedPlayerId,
+			(player) => player._id === selectedPlayerId,
 		)
 
 		if (selectedPlayer) {
@@ -249,7 +249,7 @@ export const Teams = () => {
 	const handleRemovePlayer = (playerId: string) => {
 		setNewTeam((prev) => ({
 			...prev,
-			players: prev.players.filter((player) => player.id !== playerId),
+			players: prev.players.filter((player) => player._id !== playerId),
 		}))
 	}
 
@@ -293,7 +293,7 @@ export const Teams = () => {
 	const unselectedPlayers = availablePlayers.filter(
 		(player) =>
 			!newTeam.players.some(
-				(selectedPlayer) => selectedPlayer.id === player.id,
+				(selectedPlayer) => selectedPlayer._id === player._id,
 			),
 	)
 
@@ -376,7 +376,7 @@ export const Teams = () => {
 							Wybierz zawodnika
 						</option>
 						{unselectedPlayers.map((player) => (
-							<option key={player.id} value={player.id}>
+							<option key={player._id} value={player._id}>
 								{player.firstName} {player.lastName}
 							</option>
 						))}
@@ -393,12 +393,12 @@ export const Teams = () => {
 					<h4>Wybrani Zawodnicy:</h4>
 					<ul>
 						{newTeam.players.map((player) => (
-							<li key={player.id}>
+							<li key={player._id}>
 								{player.firstName} {player.lastName}
 								<button
 									type="button"
 									onClick={() =>
-										handleRemovePlayer(player.id)
+										handleRemovePlayer(player._id)
 									}
 								>
 									Usuń

@@ -6,7 +6,9 @@ export const useDeleteMongoPlayer = (
 	refetch: () => void,
 ) => {
 	const handleDelete = async (player: Player) => {
-		const isInTeam = teams?.some((team) => team.players.includes(player._id))
+		const isInTeam = teams?.some((team) =>
+			team.players.includes(player._id),
+		)
 		if (isInTeam) {
 			alert(
 				'Nie można usunąć zawodnika, który jest przypisany do drużyny.',

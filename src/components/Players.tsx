@@ -154,7 +154,6 @@ export const Players = () => {
 	const { data, refetch } = useMongoPlayers()
 	const { teams } = useTeams()
 
-
 	const {
 		newPlayer,
 		editingPlayer,
