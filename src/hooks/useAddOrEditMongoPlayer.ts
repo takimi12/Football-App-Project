@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { Player } from '../types/players'
 
-export const useAddOrEditPlayer = (refetch: () => void) => {
+export const useAddOrEditMongoPlayer = (refetch: () => void) => {
 	const [newPlayer, setNewPlayer] = useState({ firstName: '', lastName: '' })
 	const [editingPlayer, setEditingPlayer] = useState<Player | null>(null)
 	const [errors, setErrors] = useState({ firstName: '', lastName: '' })

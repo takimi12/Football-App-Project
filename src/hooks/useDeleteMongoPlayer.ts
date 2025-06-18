@@ -1,7 +1,7 @@
 import { Team } from '../types/teams'
 import { Player } from '../types/players'
 
-export const useDeletePlayer = (
+export const useDeleteMongoPlayer = (
 	teams: Team[] | undefined,
 	refetch: () => void,
 ) => {
@@ -20,8 +20,9 @@ export const useDeletePlayer = (
 		if (confirmDeleteAction) {
 			try {
 				await fetch(
-					`http://localhost:3001/player/${player.id}`,
+					`https://football-app-project-fhr7.vercel.app/api/players/${player.id}`,
 					{
+						
 						method: 'DELETE',
 					},
 				)

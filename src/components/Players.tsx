@@ -1,8 +1,8 @@
 import React from 'react'
-import { usePlayers } from '../hooks/useGetPlayers'
+import { useMongoPlayers } from '../hooks/useGetMongoPlayers'
 import { useTeams } from '../hooks/useTeams'
-import { useAddOrEditPlayer } from '../hooks/useAddOrEditPlayer'
-import { useDeletePlayer } from '../hooks/useDeletePlayer'
+import { useAddOrEditMongoPlayer } from '../hooks/useAddOrEditMongoPlayer'
+import { useDeleteMongoPlayer } from '../hooks/useDeleteMongoPlayer'
 import { Player } from '../types/players'
 import styled from 'styled-components'
 
@@ -151,7 +151,7 @@ const PlayerCannotDeleteMessage = styled.p`
 `
 
 export const Players = () => {
-	const { data, refetch } = usePlayers()
+	const { data, refetch } = useMongoPlayers()
 	const { teams } = useTeams()
 
 	const {
@@ -161,9 +161,9 @@ export const Players = () => {
 		handleInputChange,
 		handleSubmit,
 		handleEdit,
-	} = useAddOrEditPlayer(refetch)
+	} = useAddOrEditMongoPlayer(refetch)
 
-	const { handleDelete } = useDeletePlayer(teams, refetch)
+	const { handleDelete } = useDeleteMongoPlayer(teams, refetch)
 
 	const isDataEmpty = !data || data.length === 0
 
