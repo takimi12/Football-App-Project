@@ -1,11 +1,11 @@
 import { Team } from '../types/teams'
-import { Player } from '../types/players'
+import { PlayerMongo } from '../types/players'
 
 export const useDeleteMongoPlayer = (
 	teams: Team[] | undefined,
 	refetch: () => void,
 ) => {
-	const handleDelete = async (player: Player) => {
+	const handleDelete = async (player: PlayerMongo) => {
 		const isInTeam = teams?.some((team) =>
 			team.players.includes(player._id),
 		)

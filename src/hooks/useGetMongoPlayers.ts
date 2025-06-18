@@ -1,8 +1,8 @@
 import { useQuery } from '@tanstack/react-query'
-import { Player } from '../types/players'
+import { PlayerMongo } from '../types/players'
 
 export const useMongoPlayers = () => {
-	const { data, refetch } = useQuery<Player[]>({
+	const { data, refetch } = useQuery<PlayerMongo[]>({
 		queryKey: ['players'],
 		queryFn: async () => {
 			const response = await fetch(

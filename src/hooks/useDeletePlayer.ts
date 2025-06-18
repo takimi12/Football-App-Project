@@ -1,13 +1,13 @@
 import { Team } from '../types/teams'
-import { Player } from '../types/players'
+import { PlayerLocal } from '../types/players'
 
 export const useDeletePlayer = (
 	teams: Team[] | undefined,
 	refetch: () => void,
 ) => {
-	const handleDelete = async (player: Player) => {
+	const handleDelete = async (player: PlayerLocal) => {
 		const isInTeam = teams?.some((team) =>
-			team.players.includes(player._id),
+			team.players.includes(player.id),
 		)
 		if (isInTeam) {
 			alert(
@@ -21,7 +21,7 @@ export const useDeletePlayer = (
 		)
 		if (confirmDeleteAction) {
 			try {
-				await fetch(`http://localhost:3001/player/${player._id}`, {
+				await fetch(`http://localhost:3001/player/${player.id}`, {
 					method: 'DELETE',
 				})
 				refetch()
