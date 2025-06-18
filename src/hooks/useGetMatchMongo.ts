@@ -5,7 +5,7 @@ export const useGetMatchMongo = () => {
 		queryKey: ['matches'],
 		queryFn: async () => {
 			const response = await fetch(
-				'https://car-configurator-pa82.vercel.app/api/matches',
+				'https://football-app-project-fhr7.vercel.app//api/matches',
 			)
 			if (!response.ok) {
 				throw new Error('Failed to fetch matches')
