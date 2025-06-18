@@ -12,13 +12,16 @@ const updateMatchMongo = async (matchData: {
 }) => {
 	const { matchId, ...updatedData } = matchData
 
-	const response = await fetch(`https://football-app-project-fhr7.vercel.app//api/matches/${matchId}`, {
-		method: 'PUT',
-		headers: {
-			'Content-Type': 'application/json',
+	const response = await fetch(
+		`https://football-app-project-fhr7.vercel.app//api/matches/${matchId}`,
+		{
+			method: 'PUT',
+			headers: {
+				'Content-Type': 'application/json',
+			},
+			body: JSON.stringify(updatedData),
 		},
-		body: JSON.stringify(updatedData),
-	})
+	)
 
 	if (!response.ok) {
 		throw new Error('Failed to update match')
