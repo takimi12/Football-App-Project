@@ -5,7 +5,7 @@ export const useAddMatchMongo = () => {
 	const mutation = useMutation({
 		mutationFn: async (newMatch: Omit<Match, 'id'>) => {
 			const response = await fetch(
-				'https://football-app-project-fhr7.vercel.app//api/matches',
+				'https://football-app-project-fhr7.vercel.app/api/matches',
 				{
 					method: 'POST',
 					headers: {
