@@ -2,7 +2,7 @@ import React from 'react'
 import { useMongoPlayers } from '../hooks/useGetMongoPlayers'
 import { useState } from 'react'
 import { PlayerMongo } from '../types/players'
-import { TeamMongo} from '../types/teams'
+import { TeamMongo } from '../types/teams'
 import { useGetMatchMongo } from '../hooks/useGetMatchMongo'
 
 import { useGetTeamsMongo } from '../hooks/useGetTeamsMongo'
@@ -203,7 +203,10 @@ export const Teams = () => {
 			}
 
 			if (editingTeam) {
-				updateTeamMutation.mutate({ _id: editingTeam._id, ...teamToSave })
+				updateTeamMutation.mutate({
+					_id: editingTeam._id,
+					...teamToSave,
+				})
 			} else {
 				addTeamMutation.mutate(teamToSave)
 			}

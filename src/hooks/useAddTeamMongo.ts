@@ -8,11 +8,14 @@ export const useAddTeamMongo = () => {
 
 	const mutation = useMutation({
 		mutationFn: async (team: NewTeam) => {
-			const response = await fetch('https://football-app-project-fhr7.vercel.app/api/teams', {
-				method: 'POST',
-				headers: { 'Content-Type': 'application/json' },
-				body: JSON.stringify(team),
-			})
+			const response = await fetch(
+				'https://football-app-project-fhr7.vercel.app/api/teams',
+				{
+					method: 'POST',
+					headers: { 'Content-Type': 'application/json' },
+					body: JSON.stringify(team),
+				},
+			)
 			if (!response.ok) throw new Error('Failed to add team')
 			return response.json()
 		},

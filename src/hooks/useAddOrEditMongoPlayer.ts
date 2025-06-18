@@ -1,9 +1,9 @@
 import { useState } from 'react'
-import { Player } from '../types/players'
+import { PlayerMongo } from '../types/players'
 
 export const useAddOrEditMongoPlayer = (refetch: () => void) => {
 	const [newPlayer, setNewPlayer] = useState({ firstName: '', lastName: '' })
-	const [editingPlayer, setEditingPlayer] = useState<Player | null>(null)
+	const [editingPlayer, setEditingPlayer] = useState<PlayerMongo | null>(null)
 	const [errors, setErrors] = useState({ firstName: '', lastName: '' })
 
 	const validate = () => {
@@ -51,7 +51,7 @@ export const useAddOrEditMongoPlayer = (refetch: () => void) => {
 		}
 	}
 
-	const handleEdit = (player: Player) => {
+	const handleEdit = (player: PlayerMongo) => {
 		setEditingPlayer(player)
 		setNewPlayer({ firstName: player.firstName, lastName: player.lastName })
 	}
