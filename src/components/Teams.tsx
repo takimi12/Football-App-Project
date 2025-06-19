@@ -393,9 +393,7 @@ export const Teams = () => {
 							<option value="none">Brak zawodnika</option>
 						)}
 						{unselectedPlayers.length === 0 && isBrakDisabled && (
-							<option disabled>
-								Brak dostępnych zawodników
-							</option>
+							<option disabled>Brak dostępnych zawodników</option>
 						)}
 					</Select>
 					{errors.players && (
