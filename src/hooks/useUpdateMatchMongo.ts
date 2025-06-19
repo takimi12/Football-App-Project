@@ -14,7 +14,6 @@ const updateMatchMongo = async (matchData: {
 }) => {
 	const { matchId, ...updatedData } = matchData
 
-	console.log('Sending update data:', updatedData) // Debug log
 
 	const response = await fetch(
 		`https://football-app-project-fhr7.vercel.app/api/matches/${matchId}`,
