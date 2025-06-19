@@ -125,7 +125,12 @@ export const Games: React.FC = () => {
 	}
 
 	const handleEdit = (match: Match) => {
-		setMatchId(match._id?.toString() ?? null) 
+		const id = match._id?.toString() ?? ''
+		console.log('🛠️ Editing match with ID:', id)
+		if (id.length !== 24) {
+			console.warn('⚠️ Invalid MongoDB ObjectId format:', id)
+		}
+		setMatchId(id)
 		setTeam1Id(match.team1Id)
 		setTeam2Id(match.team2Id)
 		setTeam1Score(String(match.team1Score))
@@ -134,6 +139,7 @@ export const Games: React.FC = () => {
 		setDuration(match.duration)
 		setLocation(match.location)
 	}
+	
 
 	const handleDelete = (matchId: string) => {
 		deleteMatchMongo(matchId)
