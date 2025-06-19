@@ -3,7 +3,9 @@ import { useMutation, useQueryClient } from '@tanstack/react-query'
 const updateMatchMongo = async (matchData: {
 	matchId: string
 	team1Id: string
+	team1Name: string  // Dodane
 	team2Id: string
+	team2Name: string  // Dodane
 	team1Score: number
 	team2Score: number
 	date: string
@@ -11,6 +13,8 @@ const updateMatchMongo = async (matchData: {
 	location: string
 }) => {
 	const { matchId, ...updatedData } = matchData
+
+	console.log('Sending update data:', updatedData) // Debug log
 
 	const response = await fetch(
 		`https://football-app-project-fhr7.vercel.app/api/matches/${matchId}`,
@@ -24,7 +28,9 @@ const updateMatchMongo = async (matchData: {
 	)
 
 	if (!response.ok) {
-		throw new Error('Failed to update match')
+		const errorText = await response.text()
+		console.error('Server error response:', errorText)
+		throw new Error(`Failed to update match: ${response.status} ${errorText}`)
 	}
 
 	return response.json()

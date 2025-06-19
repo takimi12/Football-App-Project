@@ -5,143 +5,24 @@ import { useAddMatchMongo } from '../hooks/useAddMatchMongo'
 import { useUpdateMatchMongo } from '../hooks/useUpdateMatchMongo'
 import { useDeleteMatchMongo } from '../hooks/useDeleteMatchMongo'
 import { Team } from '../types/teams'
-import styled from 'styled-components'
 import { Match } from '../types/match'
-
-const Container = styled.div`
-	max-width: 1200px;
-	margin: 0 auto;
-	padding: 20px;
-`
-
-const Title = styled.h2`
-	text-align: center;
-	color: ${({ theme }) => theme.text};
-	font-size: 2rem;
-`
-
-const FormContainer = styled.form`
-	background-color: ${({ theme }) => theme.formBackground};
-	padding: 20px;
-	border-radius: 8px;
-	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-	margin-bottom: 30px;
-	width: 100%;
-	max-width: 600px;
-`
-
-const FormField = styled.div`
-	margin-bottom: 15px;
-`
-
-const Label = styled.label`
-	font-size: 1rem;
-	font-weight: bold;
-	color: ${({ theme }) => theme.text};
-`
-
-const Input = styled.input`
-	width: 100%;
-	padding: 10px;
-	font-size: 1rem;
-	border: 2px solid ${({ theme }) => theme.inputBorder};
-	border-radius: 5px;
-	transition: border-color 0.3s ease;
-
-	&:focus {
-		border-color: ${({ theme }) => theme.inputFocusBorder};
-		outline: none;
-	}
-`
-
-const ErrorText = styled.span`
-	color: red;
-	font-size: 0.875rem;
-`
-
-const Select = styled.select`
-	width: 100%;
-	padding: 10px;
-	font-size: 1rem;
-	border: 2px solid ${({ theme }) => theme.inputBorder};
-	border-radius: 5px;
-	transition: border-color 0.3s ease;
-
-	&:focus {
-		border-color: ${({ theme }) => theme.inputFocusBorder};
-		outline: none;
-	}
-`
-
-const Button = styled.button`
-	background-color: ${({ theme }) => theme.buttonBackground};
-	color: ${({ theme }) => theme.buttonText};
-	padding: 10px 20px;
-	font-size: 1rem;
-	border: none;
-	border-radius: 5px;
-	cursor: pointer;
-	transition:
-		background-color 0.3s ease,
-		transform 0.2s ease;
-
-	&:hover {
-		background-color: ${({ theme }) => theme.buttonHoverBackground};
-		transform: scale(1.05);
-	}
-
-	&:disabled {
-		background-color: ${({ theme }) => theme.buttonDisabledBackground};
-		cursor: not-allowed;
-	}
-`
-
-const MatchListContainer = styled.div`
-	margin-top: 40px;
-`
-
-const MatchItem = styled.li`
-	background-color: ${({ theme }) => theme.listItemBackground};
-	padding: 15px;
-	border-radius: 8px;
-	margin-bottom: 15px;
-	box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-`
-
-const MatchInfo = styled.div`
-	margin-bottom: 10px;
-`
-
-const MatchActions = styled.div`
-	display: flex;
-	gap: 10px;
-`
-
-const EditButton = styled.button`
-	background-color: ${({ theme }) => theme.editButtonBackground};
-	color: ${({ theme }) => theme.editButtonText};
-	padding: 8px 15px;
-	border: none;
-	border-radius: 5px;
-	cursor: pointer;
-
-	&:hover {
-		background-color: ${({ theme }) => theme.editButtonHoverBackground};
-	}
-`
-
-const DeleteButton = styled.button`
-	background-color: ${({ theme }) => theme.deleteButtonBackground};
-	color: ${({ theme }) => theme.deleteButtonText};
-	padding: 8px 15px;
-	border: none;
-	border-radius: 5px;
-	cursor: pointer;
-
-	&:hover {
-		background-color: ${({ theme }) => theme.deleteButtonHoverBackground};
-	}
-`
+import {
+	Container,
+	Title,
+	FormContainer,
+	FormField,
+	Label,
+	Input,
+	ErrorText,
+	Select,
+	Button,
+	MatchListContainer,
+	MatchItem,
+	MatchInfo,
+	MatchActions,
+	EditButton,
+	DeleteButton
+} from './styled/Games.styles'
 
 export const Games: React.FC = () => {
 	const { teams } = useTeams()
