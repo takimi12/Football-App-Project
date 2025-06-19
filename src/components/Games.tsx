@@ -125,7 +125,7 @@ export const Games: React.FC = () => {
 	}
 
 	const handleEdit = (match: Match) => {
-		setMatchId(match._id ?? null)
+		setMatchId(match._id?.toString() ?? null) 
 		setTeam1Id(match.team1Id)
 		setTeam2Id(match.team2Id)
 		setTeam1Score(String(match.team1Score))
@@ -139,6 +139,8 @@ export const Games: React.FC = () => {
 		deleteMatchMongo(matchId)
 		refetch()
 	}
+
+	console.log(matches)
 
 	return (
 		<Container>

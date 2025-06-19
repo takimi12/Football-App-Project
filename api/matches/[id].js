@@ -59,7 +59,9 @@ module.exports = async (req, res) => {
 				typeof team2Score !== 'number' ||
 				!date
 			) {
-				return res.status(400).json({ error: 'Missing required fields' })
+				return res
+					.status(400)
+					.json({ error: 'Missing required fields' })
 			}
 
 			const result = await matches.updateOne(
@@ -76,14 +78,16 @@ module.exports = async (req, res) => {
 						duration,
 						location,
 					},
-				}
+				},
 			)
 
 			if (result.matchedCount === 0) {
 				return res.status(404).json({ error: 'Match not found' })
 			}
 
-			return res.status(200).json({ message: 'Match updated successfully' })
+			return res
+				.status(200)
+				.json({ message: 'Match updated successfully' })
 		}
 
 		res.setHeader('Allow', ['PUT'])
