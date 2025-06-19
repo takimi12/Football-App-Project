@@ -3,9 +3,9 @@ import { useMutation, useQueryClient } from '@tanstack/react-query'
 const updateMatchMongo = async (matchData: {
 	matchId: string
 	team1Id: string
-	team1Name: string  // Dodane
+	team1Name: string // Dodane
 	team2Id: string
-	team2Name: string  // Dodane
+	team2Name: string // Dodane
 	team1Score: number
 	team2Score: number
 	date: string
@@ -30,7 +30,9 @@ const updateMatchMongo = async (matchData: {
 	if (!response.ok) {
 		const errorText = await response.text()
 		console.error('Server error response:', errorText)
-		throw new Error(`Failed to update match: ${response.status} ${errorText}`)
+		throw new Error(
+			`Failed to update match: ${response.status} ${errorText}`,
+		)
 	}
 
 	return response.json()

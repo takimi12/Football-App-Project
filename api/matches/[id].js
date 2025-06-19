@@ -33,13 +33,13 @@ module.exports = async function handler(req, res) {
 		const objectId = new ObjectId(id)
 
 		if (req.method === 'DELETE') {
-			const result = await matches.deleteOne({ _id: objectId })
+			const result = await matches.deleteOne({ _id: objectId }) // ✅ _id zamiast *id
 			return res.status(200).json({ deleted: result.deletedCount })
 		}
 
 		if (req.method === 'PUT') {
 			const data = req.body
-			
+
 			// Debug log
 			console.log('Received update data:', data)
 
@@ -52,23 +52,20 @@ module.exports = async function handler(req, res) {
 			const updateData = { ...data }
 
 			// Konwersja team1Id i team2Id do ObjectId tylko jeśli są to prawidłowe ObjectId
-			// W przeciwnym razie zostaw je jako stringi
 			if (updateData.team1Id) {
 				if (ObjectId.isValid(updateData.team1Id)) {
 					updateData.team1Id = new ObjectId(updateData.team1Id)
 				}
-				// Jeśli nie jest prawidłowym ObjectId, zostaw jako string
 			}
 			
 			if (updateData.team2Id) {
 				if (ObjectId.isValid(updateData.team2Id)) {
 					updateData.team2Id = new ObjectId(updateData.team2Id)
 				}
-				// Jeśli nie jest prawidłowym ObjectId, zostaw jako string
 			}
 
 			// Sprawdź czy mecz istnieje
-			const existingMatch = await matches.findOne({ _id: objectId })
+			const existingMatch = await matches.findOne({ _id: objectId }) // ✅ _id zamiast *id
 			if (!existingMatch) {
 				return res.status(404).json({ error: 'Match not found' })
 			}
@@ -76,7 +73,7 @@ module.exports = async function handler(req, res) {
 			console.log('Updating match with data:', updateData)
 
 			const result = await matches.updateOne(
-				{ _id: objectId },
+				{ _id: objectId }, // ✅ _id zamiast *id
 				{ $set: updateData }
 			)
 
@@ -96,7 +93,7 @@ module.exports = async function handler(req, res) {
 		return res.status(500).json({ 
 			error: 'Internal Server Error',
 			message: error.message,
-			stack: process.env.NODE_ENV === 'development' ? error.stack : undefined
+			stack: process.env.NODE_ENV === 'development' ? error.stack : undefined // ✅ NODE_ENV zamiast NODE*ENV
 		})
 	}
 }

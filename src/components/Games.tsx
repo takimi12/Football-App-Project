@@ -21,7 +21,7 @@ import {
 	MatchInfo,
 	MatchActions,
 	EditButton,
-	DeleteButton
+	DeleteButton,
 } from './styled/Games.styles'
 
 export const Games: React.FC = () => {
