@@ -32,7 +32,7 @@ module.exports = async (req, res) => {
 
 	const db = cachedClient.db('myDatabase')
 	const matches = db.collection('matches')
-	
+
 	// Pobierz ID meczu z URL
 	const { matchId } = req.query
 
@@ -53,18 +53,26 @@ module.exports = async (req, res) => {
 				team2Score,
 				date,
 				duration,
-				location
+				location,
 			} = req.body
 
 			// Walidacja danych
-			if (!team1Id || !team2Id || team1Score === undefined || team2Score === undefined || !date) {
-				return res.status(400).json({ 
-					error: 'Missing required fields: team1Id, team2Id, team1Score, team2Score, date' 
+			if (
+				!team1Id ||
+				!team2Id ||
+				team1Score === undefined ||
+				team2Score === undefined ||
+				!date
+			) {
+				return res.status(400).json({
+					error: 'Missing required fields: team1Id, team2Id, team1Score, team2Score, date',
 				})
 			}
 
 			// Sprawdź czy mecz istnieje
-			const existingMatch = await matches.findOne({ _id: new ObjectId(matchId) })
+			const existingMatch = await matches.findOne({
+				_id: new ObjectId(matchId),
+			})
 			if (!existingMatch) {
 				return res.status(404).json({ error: 'Match not found' })
 			}
@@ -80,12 +88,12 @@ module.exports = async (req, res) => {
 				date,
 				duration: duration || '',
 				location: location || '',
-				updatedAt: new Date().toISOString()
+				updatedAt: new Date().toISOString(),
 			}
 
 			const result = await matches.updateOne(
 				{ _id: new ObjectId(matchId) },
-				{ $set: updateData }
+				{ $set: updateData },
 			)
 
 			if (result.matchedCount === 0) {
@@ -93,24 +101,30 @@ module.exports = async (req, res) => {
 			}
 
 			// Pobierz zaktualizowany mecz
-			const updatedMatch = await matches.findOne({ _id: new ObjectId(matchId) })
-			
+			const updatedMatch = await matches.findOne({
+				_id: new ObjectId(matchId),
+			})
+
 			return res.status(200).json({
 				message: 'Match updated successfully',
-				match: updatedMatch
+				match: updatedMatch,
 			})
 		}
 
 		// DELETE - Usuń mecz
 		if (req.method === 'DELETE') {
 			// Sprawdź czy mecz istnieje
-			const existingMatch = await matches.findOne({ _id: new ObjectId(matchId) })
+			const existingMatch = await matches.findOne({
+				_id: new ObjectId(matchId),
+			})
 			if (!existingMatch) {
 				return res.status(404).json({ error: 'Match not found' })
 			}
 
 			// Usuń mecz
-			const result = await matches.deleteOne({ _id: new ObjectId(matchId) })
+			const result = await matches.deleteOne({
+				_id: new ObjectId(matchId),
+			})
 
 			if (result.deletedCount === 0) {
 				return res.status(404).json({ error: 'Match not found' })
@@ -118,14 +132,14 @@ module.exports = async (req, res) => {
 
 			return res.status(200).json({
 				message: 'Match deleted successfully',
-				deletedId: matchId
+				deletedId: matchId,
 			})
 		}
 
 		// GET - Pobierz pojedynczy mecz (opcjonalnie)
 		if (req.method === 'GET') {
 			const match = await matches.findOne({ _id: new ObjectId(matchId) })
-			
+
 			if (!match) {
 				return res.status(404).json({ error: 'Match not found' })
 			}
@@ -136,12 +150,11 @@ module.exports = async (req, res) => {
 		// Metoda nie jest obsługiwana
 		res.setHeader('Allow', ['GET', 'PUT', 'DELETE'])
 		return res.status(405).end(`Method ${req.method} Not Allowed`)
-
 	} catch (err) {
 		console.error('❌ API handler error:', err)
-		return res.status(500).json({ 
+		return res.status(500).json({
 			error: 'Internal Server Error',
-			details: err.message 
+			details: err.message,
 		})
 	}
 }
