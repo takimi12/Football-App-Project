@@ -8,19 +8,26 @@ export const useUpdateTeamMongo = () => {
 
 	const mutation = useMutation({
 		mutationFn: async (team: UpdatedTeam) => {
+			const { _id, ...dataToUpdate } = team
 			const response = await fetch(
-				`https://football-app-project-fhr7.vercel.app/api/teams/${team._id}`,
+				`https://football-app-project-fhr7.vercel.app/api/teams/${_id}`,
 				{
 					method: 'PUT',
 					headers: { 'Content-Type': 'application/json' },
-					body: JSON.stringify(team),
+					body: JSON.stringify(dataToUpdate),
 				},
 			)
-			if (!response.ok) throw new Error('Failed to update team')
+			if (!response.ok) {
+				const errData = await response.json()
+				throw new Error(errData?.error || 'Failed to update team')
+			}
 			return response.json()
 		},
 		onSuccess: () => {
 			queryClient.invalidateQueries({ queryKey: ['teams'] })
+		},
+		onError: (error: unknown) => {
+			console.error('❌ Update failed:', error)
 		},
 	})
 
