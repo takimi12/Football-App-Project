@@ -1,10 +1,10 @@
 import React, { useState } from 'react'
-import { useTeams } from '../hooks/useTeams'
+import { useGetTeamsMongo } from '../hooks/useGetTeamsMongo'
 import { useGetMatchMongo } from '../hooks/useGetMatchMongo'
 import { useAddMatchMongo } from '../hooks/useAddMatchMongo'
 import { useUpdateMatchMongo } from '../hooks/useUpdateMatchMongo'
 import { useDeleteMatchMongo } from '../hooks/useDeleteMatchMongo'
-import { Team } from '../types/teams'
+import { Team, TeamMongo } from '../types/teams'
 import { Match } from '../types/match'
 import {
 	Container,
@@ -25,7 +25,7 @@ import {
 } from './styled/Games.styles'
 
 export const Games: React.FC = () => {
-	const { teams } = useTeams()
+	const { teams } = useGetTeamsMongo()
 	const { addMatch } = useAddMatchMongo()
 	const { refetch, matches } = useGetMatchMongo()
 	const { mutate: updateMatch } = useUpdateMatchMongo()
@@ -68,8 +68,8 @@ export const Games: React.FC = () => {
 			setTeamError('')
 		}
 
-		const team1 = teams?.find((team) => team.id === team1Id)
-		const team2 = teams?.find((team) => team.id === team2Id)
+		const team1 = teams?.find((team) => team._id === team1Id)
+		const team2 = teams?.find((team) => team._id === team2Id)
 		if (!team1 || !team2) {
 			setTeamError('Wybierz jakąś druzyne.')
 			isValid = false
@@ -99,9 +99,9 @@ export const Games: React.FC = () => {
 		if (!isValid) return
 
 		const newMatch = {
-			team1Id: team1?.id || '',
+			team1Id: team1?._id || '',
 			team1Name: team1?.name || '',
-			team2Id: team2?.id || '',
+			team2Id: team2?._id || '',
 			team2Name: team2?.name || '',
 			team1Score: parseInt(team1Score, 10),
 			team2Score: parseInt(team2Score, 10),
@@ -145,7 +145,6 @@ export const Games: React.FC = () => {
 		refetch()
 	}
 
-	console.log(matches)
 
 	return (
 		<Container>
@@ -159,8 +158,8 @@ export const Games: React.FC = () => {
 						onChange={(e) => setTeam1Id(e.target.value)}
 					>
 						<option value="">Select Team</option>
-						{teams?.map((team: Team) => (
-							<option key={team.id} value={team.id}>
+						{teams?.map((team: TeamMongo) => (
+							<option key={team._id} value={team._id}>
 								{team.name}
 							</option>
 						))}
@@ -176,9 +175,9 @@ export const Games: React.FC = () => {
 					>
 						<option value="">Select Team</option>
 						{teams
-							?.filter((team: Team) => team.id !== team1Id)
-							.map((team: Team) => (
-								<option key={team.id} value={team.id}>
+							?.filter((team: TeamMongo) => team._id !== team1Id)
+							.map((team: TeamMongo) => (
+								<option key={team._id} value={team._id}>
 									{team.name}
 								</option>
 							))}
