@@ -23,15 +23,17 @@ async function connectToDatabase() {
 	}
 	return cachedClient.db('myDatabase')
 }
-
 module.exports = async (req, res) => {
 	const {
 		query: { matchId },
 		method,
 	} = req
 
-	if (!ObjectId.isValid(matchId)) {
-		return res.status(400).json({ error: 'Invalid match ID' })
+	let objectId
+	try {
+		objectId = new ObjectId(matchId)
+	} catch (err) {
+		return res.status(400).json({ error: 'Invalid match ID format' })
 	}
 
 	const db = await connectToDatabase()
@@ -51,7 +53,6 @@ module.exports = async (req, res) => {
 				location,
 			} = req.body
 
-			// Walidacja danych wejściowych
 			if (
 				!team1Id ||
 				!team2Id ||
@@ -59,13 +60,11 @@ module.exports = async (req, res) => {
 				typeof team2Score !== 'number' ||
 				!date
 			) {
-				return res
-					.status(400)
-					.json({ error: 'Missing required fields' })
+				return res.status(400).json({ error: 'Missing required fields' })
 			}
 
 			const result = await matches.updateOne(
-				{ _id: new ObjectId(matchId) },
+				{ _id: objectId },
 				{
 					$set: {
 						team1Id,
@@ -90,10 +89,19 @@ module.exports = async (req, res) => {
 				.json({ message: 'Match updated successfully' })
 		}
 
-		res.setHeader('Allow', ['PUT'])
+		if (method === 'GET') {
+			const match = await matches.findOne({ _id: objectId })
+			if (!match) {
+				return res.status(404).json({ error: 'Match not found' })
+			}
+			match._id = match._id.toString()
+			return res.status(200).json(match)
+		}
+
+		res.setHeader('Allow', ['PUT', 'GET'])
 		return res.status(405).end(`Method ${method} Not Allowed`)
 	} catch (err) {
-		console.error('❌ API PUT handler error:', err)
+		console.error('❌ API handler error:', err)
 		return res.status(500).json({ error: 'Internal Server Error' })
 	}
 }

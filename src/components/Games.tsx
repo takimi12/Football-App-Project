@@ -139,7 +139,6 @@ export const Games: React.FC = () => {
 		setDuration(match.duration)
 		setLocation(match.location)
 	}
-	
 
 	const handleDelete = (matchId: string) => {
 		deleteMatchMongo(matchId)
