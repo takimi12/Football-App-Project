@@ -156,6 +156,7 @@ export const Teams = () => {
 	const deleteTeamMutation = useDeleteTeamMongo()
 	const { matches } = useGetMatchMongo()
 
+	console.log(teams)
 	const [newTeam, setNewTeam] = useState({
 		name: '',
 		yearFounded: '',

@@ -6,9 +6,7 @@ export const useDeletePlayer = (
 	refetch: () => void,
 ) => {
 	const handleDelete = async (player: PlayerLocal) => {
-		const isInTeam = teams?.some((team) =>
-			team.players.includes(player.id),
-		)
+		const isInTeam = teams?.some((team) => team.players.includes(player.id))
 		if (isInTeam) {
 			alert(
 				'Nie można usunąć zawodnika, który jest przypisany do drużyny.',
