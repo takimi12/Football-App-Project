@@ -147,6 +147,7 @@ const TeamContainer = styled.div`
 const TeamInfo = styled.div`
 	flex: 1;
 `
+// ... (wszystkie importy i styled-components pozostają bez zmian)
 
 export const Teams = () => {
 	const { teams } = useGetTeamsMongo()
@@ -156,7 +157,6 @@ export const Teams = () => {
 	const deleteTeamMutation = useDeleteTeamMongo()
 	const { matches } = useGetMatchMongo()
 
-	console.log(teams)
 	const [newTeam, setNewTeam] = useState({
 		name: '',
 		yearFounded: '',
@@ -302,7 +302,7 @@ export const Teams = () => {
 			),
 	)
 
-	const isBrakDisabled = newTeam.players.length > 0
+	const isBrakDisabled = newTeam.players.some((p) => p._id === 'none')
 
 	const handleDeleteTeam = (teamId: string) => {
 		const confirmDelete = window.confirm(
@@ -376,18 +376,27 @@ export const Teams = () => {
 						id="players"
 						onChange={handleSelectChange}
 						name="players"
+						disabled={
+							unselectedPlayers.length === 0 && isBrakDisabled
+						}
 					>
-						<option value="" disabled={newTeam.players.length > 0}>
+						<option value="" disabled selected>
 							Wybierz zawodnika
 						</option>
-						{unselectedPlayers.map((player) => (
-							<option key={player._id} value={player._id}>
-								{player.firstName} {player.lastName}
+						{unselectedPlayers.length > 0 &&
+							unselectedPlayers.map((player) => (
+								<option key={player._id} value={player._id}>
+									{player.firstName} {player.lastName}
+								</option>
+							))}
+						{!isBrakDisabled && (
+							<option value="none">Brak zawodnika</option>
+						)}
+						{unselectedPlayers.length === 0 && isBrakDisabled && (
+							<option disabled>
+								Brak dostępnych zawodników
 							</option>
-						))}
-						<option value="none" disabled={isBrakDisabled}>
-							Brak zawodnika
-						</option>
+						)}
 					</Select>
 					{errors.players && (
 						<ErrorMessage>{errors.players}</ErrorMessage>
@@ -399,7 +408,7 @@ export const Teams = () => {
 					<ul>
 						{newTeam.players.map((player) => (
 							<li key={player._id}>
-								{player.firstName} {player.lastName}
+								{player.firstName} {player.lastName}{' '}
 								<button
 									type="button"
 									onClick={() =>
