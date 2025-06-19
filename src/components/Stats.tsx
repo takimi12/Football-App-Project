@@ -3,67 +3,17 @@ import { Bar } from 'react-chartjs-2'
 import 'chart.js/auto'
 import { useMongoGames } from '../hooks/useMongoStatistic'
 import { GroupByPeriod, TeamScore } from '../types/game'
-import styled from 'styled-components'
+import {
+	Container,
+	Title,
+	SectionTitle,
+	StatsSelector,
+	ChartWrapper,
+	GameDetails,
+	GameInfo,
+	ErrorMessage,
+} from './styled/Stats.styles'
 
-const Container = styled.div`
-	max-width: 1200px;
-	margin: 0 auto;
-	padding: 20px;
-`
-
-const Title = styled.h2`
-	text-align: center;
-	color: ${({ theme }) => theme.text};
-	font-size: 2rem;
-`
-
-const SectionTitle = styled.h3`
-	color: ${({ theme }) => theme.text};
-	font-size: 1.5rem;
-	margin-top: 30px;
-`
-
-const StatsSelector = styled.div`
-	margin-bottom: 20px;
-	text-align: center;
-
-	label {
-		font-size: 1rem;
-		font-weight: bold;
-		margin-right: 10px;
-	}
-
-	select {
-		font-size: 1rem;
-		padding: 10px;
-		border: 1px solid ${({ theme }) => theme.inputBorder};
-		border-radius: 5px;
-	}
-`
-
-const ChartWrapper = styled.div`
-	width: 100%;
-	max-width: 900px;
-	margin: 30px auto;
-`
-
-const GameDetails = styled.div`
-	margin-bottom: 20px;
-	padding: 20px;
-	background-color: ${({ theme }) => theme.cardBackground};
-	border-radius: 8px;
-	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-`
-
-const GameInfo = styled.p`
-	margin: 5px 0;
-	color: ${({ theme }) => theme.text};
-`
-
-const ErrorMessage = styled.p`
-	color: red;
-	font-weight: bold;
-`
 
 export const Statistics: React.FC = () => {
 	const [groupBy, setGroupBy] = useState<GroupByPeriod>('day')

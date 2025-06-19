@@ -4,150 +4,25 @@ import { useState } from 'react'
 import { PlayerMongo } from '../types/players'
 import { TeamMongo } from '../types/teams'
 import { useGetMatchMongo } from '../hooks/useGetMatchMongo'
-
 import { useGetTeamsMongo } from '../hooks/useGetTeamsMongo'
 import { useAddTeamMongo } from '../hooks/useAddTeamMongo'
 import { useUpdateTeamMongo } from '../hooks/useUpdateTeamMongo'
 import { useDeleteTeamMongo } from '../hooks/useDeleteTeamMongo'
-import styled from 'styled-components'
-
-const Container = styled.div`
-	max-width: 1200px;
-	margin: 0 auto;
-	padding: 20px;
-`
-
-const Title = styled.h3`
-	text-align: center;
-	font-size: 2rem;
-	color: ${({ theme }) => theme.text};
-`
-
-const FormContainer = styled.form`
-	background-color: ${({ theme }) => theme.formBackground};
-	padding: 20px;
-	border-radius: 8px;
-	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-	width: 100%;
-	max-width: 600px;
-	margin-bottom: 30px;
-`
-
-const FormField = styled.div`
-	margin-bottom: 20px;
-`
-
-const Label = styled.label`
-	font-size: 1rem;
-	color: ${({ theme }) => theme.text};
-	font-weight: bold;
-`
-
-const Input = styled.input`
-	width: 100%;
-	padding: 10px;
-	font-size: 1rem;
-	border: 2px solid ${({ theme }) => theme.inputBorder};
-	border-radius: 5px;
-	transition: border-color 0.3s ease;
-
-	&:focus {
-		border-color: ${({ theme }) => theme.inputFocusBorder};
-		outline: none;
-	}
-`
-
-const Select = styled.select`
-	width: 100%;
-	padding: 10px;
-	font-size: 1rem;
-	border: 2px solid ${({ theme }) => theme.inputBorder};
-	border-radius: 5px;
-	transition: border-color 0.3s ease;
-
-	&:focus {
-		border-color: ${({ theme }) => theme.inputFocusBorder};
-		outline: none;
-	}
-`
-
-const ErrorMessage = styled.p`
-	color: red;
-	font-size: 0.875rem;
-	margin-top: 5px;
-`
-
-const Button = styled.button`
-	background-color: ${({ theme }) => theme.buttonBackground};
-	color: ${({ theme }) => theme.buttonText};
-	padding: 10px 20px;
-	font-size: 1rem;
-	border: none;
-	border-radius: 5px;
-	cursor: pointer;
-	transition:
-		background-color 0.3s ease,
-		transform 0.2s ease;
-
-	&:hover {
-		background-color: ${({ theme }) => theme.buttonHoverBackground};
-		transform: scale(1.05);
-	}
-
-	&:disabled {
-		background-color: ${({ theme }) => theme.buttonDisabledBackground};
-		cursor: not-allowed;
-	}
-`
-
-const EditButton = styled.button`
-	background-color: ${({ theme }) => theme.editButtonBackground};
-	color: ${({ theme }) => theme.editButtonText};
-	padding: 8px 15px;
-	border: none;
-	border-radius: 5px;
-	cursor: pointer;
-	transition: background-color 0.3s ease;
-
-	&:hover {
-		background-color: ${({ theme }) => theme.editButtonHoverBackground};
-	}
-`
-
-const DeleteButton = styled.button`
-	background-color: ${({ theme }) => theme.deleteButtonBackground};
-	color: ${({ theme }) => theme.deleteButtonText};
-	padding: 8px 15px;
-	border: none;
-	border-radius: 5px;
-	cursor: pointer;
-	transition: background-color 0.3s ease;
-
-	&:hover {
-		background-color: ${({ theme }) => theme.deleteButtonHoverBackground};
-	}
-
-	&:disabled {
-		background-color: ${({ theme }) =>
-			theme.deleteButtonDisabledBackground};
-		cursor: not-allowed;
-	}
-`
-
-const TeamContainer = styled.div`
-	display: flex;
-	gap: 30px;
-	padding: 20px;
-	border-radius: 8px;
-	background-color: ${({ theme }) => theme.listItemBackground};
-	margin-bottom: 20px;
-	box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-`
-
-const TeamInfo = styled.div`
-	flex: 1;
-`
-// ... (wszystkie importy i styled-components pozostają bez zmian)
+import {
+	Container,
+	Title,
+	FormContainer,
+	FormField,
+	Label,
+	Input,
+	Select,
+	ErrorMessage,
+	Button,
+	EditButton,
+	DeleteButton,
+	TeamContainer,
+	TeamInfo,
+} from './styled/Teams.styles'
 
 export const Teams = () => {
 	const { teams } = useGetTeamsMongo()
