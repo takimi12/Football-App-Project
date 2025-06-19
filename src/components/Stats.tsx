@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { Bar } from 'react-chartjs-2'
 import 'chart.js/auto'
-import { useGames } from '../hooks/useStatistics'
+import { useMongoGames } from '../hooks/useMongoStatistic'
 import { GroupByPeriod, TeamScore } from '../types/game'
 import styled from 'styled-components'
 
@@ -67,7 +67,7 @@ const ErrorMessage = styled.p`
 
 export const Statistics: React.FC = () => {
 	const [groupBy, setGroupBy] = useState<GroupByPeriod>('day')
-	const { data: games = [], error } = useGames()
+	const { data: games = [], error } = useMongoGames()
 
 	if (error instanceof Error) {
 		return <ErrorMessage>Error: {error.message}</ErrorMessage>
@@ -109,7 +109,6 @@ export const Statistics: React.FC = () => {
 			return dateObj.toISOString().split('T')[0]
 		} else if (period === 'week') {
 			const startOfWeek = new Date(dateObj)
-			// Ustawiamy na początek tygodnia (poniedziałek)
 			startOfWeek.setDate(
 				dateObj.getDate() -
 					dateObj.getDay() +
@@ -119,7 +118,6 @@ export const Statistics: React.FC = () => {
 			const endOfWeek = new Date(startOfWeek)
 			endOfWeek.setDate(startOfWeek.getDate() + 6)
 
-			// Format: "DD.MM - DD.MM"
 			const formatDay = (date: Date) => {
 				const day = date.getDate().toString().padStart(2, '0')
 				const month = (date.getMonth() + 1).toString().padStart(2, '0')
@@ -149,7 +147,6 @@ export const Statistics: React.FC = () => {
 				const [startB] = b.split(' - ')
 				const [dayA, monthA] = startA.split('.')
 				const [dayB, monthB] = startB.split('.')
-				// Zakładamy ten sam rok
 				return (
 					new Date(
 						2024,

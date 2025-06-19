@@ -10,6 +10,18 @@ export interface Game {
 	duration: string
 	location: string
 }
+export interface MongoGame {
+	_id: string
+	team1Id: string
+	team1Name: string
+	team2Id: string
+	team2Name: string
+	team1Score: number
+	team2Score: number
+	date: string
+	duration: string
+	location: string
+}
 
 export type TeamScore = {
 	team: string

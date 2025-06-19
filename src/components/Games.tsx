@@ -145,7 +145,6 @@ export const Games: React.FC = () => {
 		refetch()
 	}
 
-
 	return (
 		<Container>
 			<FormContainer onSubmit={handleSubmit}>

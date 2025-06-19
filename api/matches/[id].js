@@ -30,7 +30,7 @@ module.exports = async (req, res) => {
 	}
 
 	const db = cachedClient.db('myDatabase')
-	const matchesCollection = db.collection('matches') 
+	const matchesCollection = db.collection('matches')
 
 	try {
 		if (req.method === 'POST') {
@@ -40,8 +40,8 @@ module.exports = async (req, res) => {
 			const data = await matchesCollection.find({}).toArray()
 			return res.status(200).json(data)
 		} else if (req.method === 'PUT') {
-			const { id } = req.query 
-			const updatedData = req.body 
+			const { id } = req.query
+			const updatedData = req.body
 
 			if (!ObjectId.isValid(id)) {
 				return res
@@ -50,8 +50,8 @@ module.exports = async (req, res) => {
 			}
 
 			const result = await matchesCollection.updateOne(
-				{ _id: new ObjectId(id) }, 
-				{ $set: updatedData }, 
+				{ _id: new ObjectId(id) },
+				{ $set: updatedData },
 			)
 
 			if (result.matchedCount === 0) {
@@ -62,9 +62,7 @@ module.exports = async (req, res) => {
 				.status(200)
 				.json({ message: 'Match updated successfully' })
 		} else if (req.method === 'DELETE') {
-
-			const { id } = req.query 
-
+			const { id } = req.query
 
 			if (!ObjectId.isValid(id)) {
 				return res
