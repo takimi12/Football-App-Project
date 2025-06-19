@@ -1,8 +1,8 @@
-import { Team } from '../types/teams'
+import { Team, TeamMongo } from '../types/teams'
 import { PlayerMongo } from '../types/players'
 
 export const useDeleteMongoPlayer = (
-	teams: Team[] | undefined,
+	teams: TeamMongo[] | undefined,
 	refetch: () => void,
 ) => {
 	const handleDelete = async (player: PlayerMongo) => {

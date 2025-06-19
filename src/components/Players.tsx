@@ -1,11 +1,9 @@
-import React from 'react'
 import { useMongoPlayers } from '../hooks/useGetMongoPlayers'
-import { useTeams } from '../hooks/useTeams'
+import { useGetTeamsMongo } from '../hooks/useGetTeamsMongo'
 import { useAddOrEditMongoPlayer } from '../hooks/useAddOrEditMongoPlayer'
 import { useDeleteMongoPlayer } from '../hooks/useDeleteMongoPlayer'
 import { PlayerMongo } from '../types/players'
-import styled from 'styled-components'
- import {
+import {
 	PlayersContainer,
 	Title,
 	Form,
@@ -23,11 +21,9 @@ import styled from 'styled-components'
 	PlayerCannotDeleteMessage,
 } from './styled/Players.styles'
 
-
-
 export const Players = () => {
 	const { data, refetch } = useMongoPlayers()
-	const { teams } = useTeams()
+	const { teams } = useGetTeamsMongo()
 
 	const {
 		newPlayer,

@@ -14,7 +14,6 @@ import {
 	ErrorMessage,
 } from './styled/Stats.styles'
 
-
 export const Statistics: React.FC = () => {
 	const [groupBy, setGroupBy] = useState<GroupByPeriod>('day')
 	const { data: games = [], error } = useMongoGames()
