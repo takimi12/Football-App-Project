@@ -10,6 +10,7 @@ export const useAddTeamMongo = () => {
 		mutationFn: async (team: NewTeam) => {
 			const response = await fetch(
 				'https://football-app-project-fhr7.vercel.app/api/teams',
+
 				{
 					method: 'POST',
 					headers: { 'Content-Type': 'application/json' },

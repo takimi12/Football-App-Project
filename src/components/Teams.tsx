@@ -45,6 +45,7 @@ export const Teams = () => {
 		players: '',
 	})
 	const [editingTeam, setEditingTeam] = useState<TeamMongo | null>(null)
+	const [selectValue, setSelectValue] = useState('')
 
 	const handleEditTeam = (team: TeamMongo) => {
 		const players = team.players
@@ -66,6 +67,7 @@ export const Teams = () => {
 		setEditingTeam(null)
 		setNewTeam({ name: '', yearFounded: '', location: '', players: [] })
 		setErrors({ name: '', yearFounded: '', location: '', players: '' })
+		setSelectValue('') 
 	}
 
 	const handleSaveTeam = (e: React.FormEvent) => {
@@ -111,6 +113,7 @@ export const Teams = () => {
 					},
 				],
 			}))
+			setSelectValue('')
 			return
 		}
 
@@ -123,6 +126,7 @@ export const Teams = () => {
 				...prev,
 				players: [...prev.players, selectedPlayer],
 			}))
+			setSelectValue('')
 		}
 	}
 
@@ -202,11 +206,11 @@ export const Teams = () => {
 		<Container>
 			<FormContainer onSubmit={handleSaveTeam}>
 				<Title>
-					{editingTeam ? 'Edytuj Drużynę' : 'Dodaj Nową Drużynę'}
+					{editingTeam ? 'Edit Teams' : 'Add new teams'}
 				</Title>
 
 				<FormField>
-					<Label htmlFor="name">Nazwa:</Label>
+					<Label htmlFor="name">Name:</Label>
 					<Input
 						type="text"
 						id="name"
@@ -218,7 +222,7 @@ export const Teams = () => {
 				</FormField>
 
 				<FormField>
-					<Label htmlFor="yearFounded">Rok Założenia:</Label>
+					<Label htmlFor="yearFounded">Year Founded:</Label>
 					<Input
 						type="number"
 						id="yearFounded"
@@ -232,7 +236,7 @@ export const Teams = () => {
 				</FormField>
 
 				<FormField>
-					<Label htmlFor="location">Lokalizacja:</Label>
+					<Label htmlFor="location">Location:</Label>
 					<Input
 						type="text"
 						id="location"
@@ -246,17 +250,18 @@ export const Teams = () => {
 				</FormField>
 
 				<FormField>
-					<Label htmlFor="players">Zawodnicy:</Label>
+					<Label htmlFor="players">Players:</Label>
 					<Select
 						id="players"
 						onChange={handleSelectChange}
 						name="players"
+						value={selectValue} 
 						disabled={
 							unselectedPlayers.length === 0 && isBrakDisabled
 						}
 					>
-						<option value="" disabled selected>
-							Wybierz zawodnika
+						<option value="">
+							choose players
 						</option>
 						{unselectedPlayers.length > 0 &&
 							unselectedPlayers.map((player) => (
@@ -264,11 +269,9 @@ export const Teams = () => {
 									{player.firstName} {player.lastName}
 								</option>
 							))}
-						{!isBrakDisabled && (
-							<option value="none">Brak zawodnika</option>
-						)}
+					
 						{unselectedPlayers.length === 0 && isBrakDisabled && (
-							<option disabled>Brak dostępnych zawodników</option>
+							<option disabled>no available players</option>
 						)}
 					</Select>
 					{errors.players && (
@@ -277,7 +280,7 @@ export const Teams = () => {
 				</FormField>
 
 				<FormField>
-					<h4>Wybrani Zawodnicy:</h4>
+					<h4>Choose Players:</h4>
 					<ul>
 						{newTeam.players.map((player) => (
 							<li key={player._id}>
@@ -288,7 +291,7 @@ export const Teams = () => {
 										handleRemovePlayer(player._id)
 									}
 								>
-									Usuń
+									Delete
 								</button>
 							</li>
 						))}
@@ -297,11 +300,11 @@ export const Teams = () => {
 
 				<div>
 					<Button type="submit">
-						{editingTeam ? 'Zapisz Zmiany' : 'Dodaj Drużynę'}
+						{editingTeam ? 'Save changes' : 'Add teams'}
 					</Button>
 					{editingTeam && (
 						<Button type="button" onClick={cancelEdit}>
-							Anuluj
+							Cancel
 						</Button>
 					)}
 				</div>
@@ -311,16 +314,16 @@ export const Teams = () => {
 				<TeamContainer key={team._id}>
 					<TeamInfo>
 						<p>
-							<strong>Nazwa:</strong> {team.name}
+							<strong>Name:</strong> {team.name}
 						</p>
 						<p>
-							<strong>Lokalizacja:</strong> {team.location}
+							<strong>Location:</strong> {team.location}
 						</p>
 						<p>
-							<strong>Rok Założenia:</strong> {team.yearFounded}
+							<strong>Year founded:</strong> {team.yearFounded}
 						</p>
 						<p>
-							<strong>Liczba Zawodników:</strong>{' '}
+							<strong>Number of players:</strong>{' '}
 							{
 								team.players.filter(
 									(playerId) => playerId !== 'none',
@@ -330,7 +333,7 @@ export const Teams = () => {
 					</TeamInfo>
 					<div>
 						<EditButton onClick={() => handleEditTeam(team)}>
-							Edytuj
+							Edit
 						</EditButton>
 						<DeleteButton
 							onClick={() => handleDeleteTeam(team._id)}
@@ -345,8 +348,8 @@ export const Teams = () => {
 									match.team1Id === team._id ||
 									match.team2Id === team._id,
 							)
-								? 'Nie można usunąć drużyny biorącej udział w rozgrywkach'
-								: 'Usuń'}
+								? 'You can`t delete the player who take part in matches'
+								: 'Delete'}
 						</DeleteButton>
 					</div>
 				</TeamContainer>

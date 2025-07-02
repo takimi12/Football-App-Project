@@ -7,7 +7,7 @@ export const useGetTeamsMongo = () => {
 		queryFn: async () => {
 			const response = await fetch(
 				'https://football-app-project-fhr7.vercel.app/api/teams',
-			)
+				)
 			return response.json()
 		},
 	})

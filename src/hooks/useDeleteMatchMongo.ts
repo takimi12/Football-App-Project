@@ -3,6 +3,7 @@ import { useMutation } from '@tanstack/react-query'
 const deleteMatchMongo = async (matchId: string) => {
 	const response = await fetch(
 		`https://football-app-project-fhr7.vercel.app/api/matches/${matchId}`,
+
 		{
 			method: 'DELETE',
 		},
