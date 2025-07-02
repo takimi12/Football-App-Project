@@ -12,8 +12,8 @@ import {
 	ToggleButton,
 	Nav,
 	NavButton,
-	TabContent
-} from './components/styled/App.styled' 
+	TabContent,
+} from './components/styled/App.styled'
 
 const queryClient = new QueryClient()
 

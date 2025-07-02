@@ -67,7 +67,7 @@ export const Teams = () => {
 		setEditingTeam(null)
 		setNewTeam({ name: '', yearFounded: '', location: '', players: [] })
 		setErrors({ name: '', yearFounded: '', location: '', players: '' })
-		setSelectValue('') 
+		setSelectValue('')
 	}
 
 	const handleSaveTeam = (e: React.FormEvent) => {
@@ -205,9 +205,7 @@ export const Teams = () => {
 	return (
 		<Container>
 			<FormContainer onSubmit={handleSaveTeam}>
-				<Title>
-					{editingTeam ? 'Edit Teams' : 'Add new teams'}
-				</Title>
+				<Title>{editingTeam ? 'Edit Teams' : 'Add new teams'}</Title>
 
 				<FormField>
 					<Label htmlFor="name">Name:</Label>
@@ -255,21 +253,19 @@ export const Teams = () => {
 						id="players"
 						onChange={handleSelectChange}
 						name="players"
-						value={selectValue} 
+						value={selectValue}
 						disabled={
 							unselectedPlayers.length === 0 && isBrakDisabled
 						}
 					>
-						<option value="">
-							choose players
-						</option>
+						<option value="">choose players</option>
 						{unselectedPlayers.length > 0 &&
 							unselectedPlayers.map((player) => (
 								<option key={player._id} value={player._id}>
 									{player.firstName} {player.lastName}
 								</option>
 							))}
-					
+
 						{unselectedPlayers.length === 0 && isBrakDisabled && (
 							<option disabled>no available players</option>
 						)}
